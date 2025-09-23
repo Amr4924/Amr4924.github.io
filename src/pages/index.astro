@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import data from '../../data.json'; // استيراد بيانات المهارات
+---
+<Layout title="SA3DWY | الرئيسية">
+    <section id="about-me" class="about-section">
+        <img src="/200176765.jpeg" alt="My Picture" class="about-pic">
+        <div class="about-text">
+            <h2>Welcome! I'm Amr (SA3DWY)</h2>
+            <p lang="en" dir="ltr">
+                A second-year student pursuing a degree in Computers and Artificial Intelligence at South Valley National University (SVNU). I'm passionate about the world of algorithms, problem-solving, and software development. I am always eager to learn new technologies and apply them to practical projects that blend creativity with technical efficiency.
+                
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid">
+            {data.skills.map(skill => (
+                <div class="skill-card">
+                    <img src={skill.icon} alt={skill.name + " icon"}>
+                    <span>{skill.name}</span>
+                </div>
+            ))}
+        </div>
+    </section>
+</Layout>

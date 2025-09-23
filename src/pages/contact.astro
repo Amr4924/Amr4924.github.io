@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import data from '../../data.json'; // استيراد روابط التواصل
+---
+<Layout title="SA3DWY | تواصل معي">
+    <section id="contact">
+        <h2 class="section-title">تواصل معي</h2>
+        <p class="section-subtitle">يمكنك متابعتي والتواصل معي عبر المنصات التالية</p>
+        <div class="social-links-grid">
+            {data.socialLinks.map(link => (
+                <a href={link.url} target="_blank" class="social-card">
+                    <img src={link.icon} alt={link.name + " icon"}>
+                    <span>{link.name}</span>
+                </a>
+            ))}
+        </div>
+    </section>
+</Layout>
