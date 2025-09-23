@@ -1,12 +1,12 @@
 {
- "skills": [
-  { "name": "C++", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" },
-  { "name": "Python", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" },
-  { "name": "Dart", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" },
-  { "name": "Git", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" },
-  { "name": "GitHub", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" },
-  { "name": "Problem Solving", "icon": "https://cdn-icons-png.flaticon.com/512/3400/3400130.png" }
-],
+  "skills": [
+    { "name": "C++", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" },
+    { "name": "Python", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" },
+    { "name": "Dart", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" },
+    { "name": "Git", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" },
+    { "name": "GitHub", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" },
+    { "name": "Problem Solving", "icon": "https://cdn-icons-png.flaticon.com/512/3400/3400130.png" }
+  ],
   "socialLinks": [
     { "name": "GitHub", "url": "https://github.com/Amr4924", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" },
     { "name": "LinkedIn", "url": "https://www.linkedin.com/in/amrsa3dwy/", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/linkedin/linkedin-plain.svg" },
@@ -15,5 +15,27 @@
     { "name": "TikTok", "url": "https://www.tiktok.com/@3mr675", "icon": "https://cdn.simpleicons.org/tiktok/FFFFFF" },
     { "name": "Linktree", "url": "https://linktr.ee/sa3dwy", "icon": "https://cdn.simpleicons.org/linktree/FFFFFF" },
     { "name": "Email", "url": "mailto:youremail@example.com", "icon": "https://cdn-icons-png.flaticon.com/512/732/732200.png" }
+  ],
+  "certificates": [
+    {
+      "title": "مقدمة في البرمجة باستخدام PYTHON",
+      "issuer": "منصة ITI",
+      "imageUrl": "/certificates/python.jpg"
+    },
+    {
+      "title": "الذكاء الاصطناعي للجميع",
+      "issuer": "منصة ITI",
+      "imageUrl": "/certificates/AI.png"
+    },
+    {
+      "title": "Computer Networks",
+      "issuer": "منصة ITI",
+      "imageUrl": "/certificates/Network.jpg"
+    },
+    {
+      "title": "Marketing",
+      "issuer": "camp Gen-Z",
+      "imageUrl": "/certificates/Marketing.jpg"
+    }
   ]
 }

@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import data from '../../data.json';
+
+const { certificates } = data;
+---
+
+<Layout title="SA3DWY | شهاداتي">
+  <section id="certificates">
+    <h2 class="section-title fade-in-up">الشهادات والتراخيص</h2>
+    <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">
+      مجموعة من الشهادات التي حصلت عليها في رحلتي التعليمية والعملية.
+    </p>
+    <div class="certificates-grid">
+      {certificates.map((cert, index) => (
+        <div class="certificate-card fade-in-up" style={`animation-delay: ${200 + index * 100}ms`}>
+          <a href={cert.imageUrl} target="_blank" class="certificate-image-link">
+            <img src={cert.imageUrl} alt={`صورة شهادة ${cert.title}`} class="certificate-image" />
+          </a>
+          <div class="certificate-content">
+            <h3>{cert.title}</h3>
+            <p><strong>صادرة من:</strong> {cert.issuer}</p>
+            {/* --- تم حذف السطر المسبب للمشكلة من هنا --- */}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

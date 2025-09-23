@@ -1,26 +1,41 @@
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 const USERNAME = 'Amr4924';
 
-export async function GET({ url }) {
-  const repoName = url.searchParams.get('repo');
-  const filePath = url.searchParams.get('path'); // פרמטר חדש לקבלת נתיב קובץ
+export async function GET({ request }) {
+  if (!GITHUB_TOKEN) {
+    console.error("Server Error: GITHUB_TOKEN is not configured.");
+    return new Response(JSON.stringify({ message: 'Server configuration error: GitHub token is missing.' }), { status: 500 });
+  }
+
+  const requestUrl = new URL(request.url);
+  const repoName = requestUrl.searchParams.get('repo');
+  const filePath = requestUrl.searchParams.get('path');
 
   if (!repoName) {
     return new Response(JSON.stringify({ message: 'Repo name is required' }), { status: 400 });
   }
 
-  // אם סופק נתיב קובץ, נביא את תוכן הקובץ. אחרת, נביא את רשימת הקבצים.
   const contentsUrl = `https://api.github.com/repos/${USERNAME}/${repoName}/contents${filePath ? `/${filePath}` : ''}`;
   
   try {
     const response = await fetch(contentsUrl, {
       headers: {
-        Authorization: `token ${GITHUB_TOKEN}`
+        Authorization: `token ${GITHUB_TOKEN}`,
+        'User-Agent': 'Astro-Portfolio-App'
       }
     });
 
     if (!response.ok) {
-        throw new Error(`GitHub API responded with ${response.status}`);
+      const errorData = await response.json();
+      const status = response.status;
+      let message = `GitHub API responded with ${status}: ${errorData.message}`;
+      if (status === 401) {
+        message = "GitHub API Authorization Failed. Check if the GITHUB_TOKEN is correct and has repo access.";
+      } else if (status === 404) {
+        message = "Repository or file not found on GitHub.";
+      }
+      console.error("GitHub API Error:", message);
+      throw new Error(message);
     }
 
     const data = await response.json();
@@ -30,7 +45,7 @@ export async function GET({ url }) {
     });
 
   } catch (error) {
-    console.error("Server-side fetch error:", error);
-    return new Response(JSON.stringify({ message: 'Failed to fetch from GitHub' }), { status: 500 });
+    console.error("Server-side fetch error:", error.message);
+    return new Response(JSON.stringify({ message: error.message || 'Failed to fetch from GitHub' }), { status: 500 });
   }
 }

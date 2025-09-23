@@ -1,20 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const token = import.meta.env.GITHUB_TOKEN;
-const username = 'Amr4924';
+const username = 'Amr4924'; 
 const url = `https://api.github.com/users/${username}/repos?sort=updated`;
 let projects = [];
 try {
     const response = await fetch(url, { headers: { Authorization: `token ${token}` } });
-    if (response.ok) { projects = await response.json(); }
-} catch (error) { console.error("Build-time fetch failed:", error); }
+    if (response.ok) { 
+        projects = await response.json(); 
+    }
+} catch (error) { 
+    console.error("Build-time fetch failed:", error);
+}
 ---
 <Layout title="SA3DWY | المشاريع">
     <section id="projects">
-        <h2 class="section-title">مشاريعي على GitHub</h2>
+        <h2 class="section-title fade-in-up">مشاريعي على GitHub</h2>
         <div id="projects-grid" class="projects-grid">
-            {projects.length > 0 ? projects.map((project: { name: string; description?: string; html_url: string }, index: number) => (
-                <div class="project-card" data-aos="fade-up" data-aos-delay={index * 100}>
+            {projects.length > 0 ?
+                projects.map((project: { name: string; description?: string; html_url: string }, index: number) => (
+                <div class="project-card fade-in-up" style={`animation-delay: ${index * 100}ms`}>
                     <h2>{project.name}</h2>
                     <p>{project.description || 'لا يوجد وصف لهذا المشروع.'}</p>
                     <div class="card-buttons">
@@ -22,56 +27,87 @@ try {
                         <a href={project.html_url} target="_blank" class="btn btn-primary">اذهب للمشروع</a>
                     </div>
                 </div>
-            )) : <div class="error-message"><h3>عفوًا، لم نتمكن من جلب المشاريع</h3></div>}
+            )) : <div class="error-message"><h3>عفوًا، لم نتمكن من جلب المشاريع. تأكد من صحة اسم المستخدم أو التوكن.</h3></div>}
         </div>
     </section>
 </Layout>
 
 <script is:inline>
-    // عناصر النافذة المنبثقة
+    // Modal Elements
     const modal = document.getElementById('code-modal');
     const modalTitle = document.getElementById('modal-title');
     const modalBody = document.getElementById('modal-body');
     const modalCloseBtn = document.getElementById('modal-close-btn');
     const copyCodeBtn = document.getElementById('copy-code-btn');
-
-    const mainFileNames = ['main.cpp', 'main.py', 'index.js', 'script.js', 'app.js', 'index.html'];
-    const priorityExtensions = ['.cpp', '.py', '.dart', '.js', '.java', '.cs', '.html'];
     
-    function decodeBase64(content) { return decodeURIComponent(window.atob(content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); }
+    // File Detection Logic
+    const mainFileNames = ['main.cpp', 'main.py', 'index.js', 'script.js', 'app.js', 'index.html'];
+    const priorityExtensions = ['.cpp', '.py', 'dart', '.js', '.java', '.cs', '.html'];
+    
+    function decodeBase64(content) { 
+        try {
+            return decodeURIComponent(window.atob(content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+        } catch (e) {
+            console.error("Base64 decoding failed:", e);
+            return "Error decoding file content.";
+        }
+    }
 
     async function showCodeContent(repoName, file) {
-        modalBody.innerHTML = '<p style="padding: 20px;">جاري تحميل الكود...</p>';
+        modalBody.innerHTML = '<div class="loader"></div>';
         try {
-            const contentResponse = await fetch(file.url); // Use the direct URL from the file object
+            const cleanedRepoName = repoName.trim();
+            const encodedRepoName = encodeURIComponent(cleanedRepoName);
+            const encodedFilePath = encodeURIComponent(file.path);
+
+            const apiUrl = `/api/getCode?repo=${encodedRepoName}&path=${encodedFilePath}`;
+            const contentResponse = await fetch(apiUrl);
+
+            if (!contentResponse.ok) {
+                const errorResult = await contentResponse.json();
+                throw new Error(errorResult.message || 'Failed to fetch file content');
+            }
+            
             const data = await contentResponse.json();
             if (data.content) {
                 const decodedContent = decodeBase64(data.content);
                 const fileExtension = file.path.split('.').pop();
                 modalBody.innerHTML = `<pre class="line-numbers language-${fileExtension}"><code>${decodedContent.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
                 Prism.highlightAll();
+            } else {
+                 modalBody.innerHTML = '<p class="modal-message">لا يمكن عرض محتوى هذا الملف.</p>';
             }
         } catch (error) {
-            modalBody.innerHTML = '<p style="padding: 20px;">لا يمكن عرض محتوى هذا الملف.</p>';
+            console.error("Content fetch error:", error);
+            modalBody.innerHTML = `<p class="modal-message">فشل في عرض محتوى الملف: ${error.message}</p>`;
         }
     }
 
-    async function showProjectCodeDirectly(repoName) {
+    async function showProjectCode(repoName) {
+        if (!repoName) {
+            console.error("showProjectCode called with no repoName.");
+            return;
+        }
+
         modalTitle.textContent = `عرض الكود للمشروع: ${repoName}`;
-        modalBody.innerHTML = '<p style="padding: 20px;">جاري البحث عن الملفات...</p>';
+        modalBody.innerHTML = '<div class="loader"></div>';
         modal.style.display = 'flex';
+        
         try {
-            // الطلب الآن يذهب إلى مسار الـ API المحلي والآمن
-            const response = await fetch(`/api/getCode?repo=${repoName}`);
+            const cleanedRepoName = repoName.trim();
+            const encodedRepoName = encodeURIComponent(cleanedRepoName);
+            const apiUrl = `/api/getCode?repo=${encodedRepoName}`;
+
+            const response = await fetch(apiUrl);
+            
             if (!response.ok) {
-                // إذا فشل الطلب من السيرفر، اعرض رسالة الخطأ
                 const errorResult = await response.json();
                 throw new Error(errorResult.message || 'API route failed');
             }
             
             const files = await response.json();
             if (!Array.isArray(files)) {
-                modalBody.innerHTML = '<p style="padding: 20px;">هذا المشروع فارغ أو أن البيانات المستلمة غير صحيحة.</p>';
+                modalBody.innerHTML = '<p class="modal-message">هذا المشروع فارغ أو أن البيانات المستلمة غير صحيحة.</p>';
                 return;
             }
 
@@ -82,17 +118,16 @@ try {
                     if (mainFile) break;
                 }
             }
-            if (!mainFile) {
-                mainFile = files.find(file => file.name.toLowerCase() === 'readme.md');
-            }
+            if (!mainFile) { mainFile = files.find(file => file.name.toLowerCase() === 'readme.md'); }
+            
             if (mainFile) {
                 await showCodeContent(repoName, mainFile);
             } else {
-                 modalBody.innerHTML = '<p style="padding: 20px;">لا توجد ملفات قابلة للعرض.</p>';
+                 modalBody.innerHTML = '<p class="modal-message">لا توجد ملفات قابلة للعرض في هذا المشروع.</p>';
             }
         } catch (error) {
             console.error("Client-side error:", error);
-            modalBody.innerHTML = '<p style="padding: 20px;">حدث خطأ أثناء جلب الملفات.</p>';
+            modalBody.innerHTML = `<p class="modal-message">حدث خطأ أثناء جلب الملفات: ${error.message}</p>`;
         }
     }
 
@@ -100,13 +135,16 @@ try {
         const viewCodeBtn = e.target.closest('.view-code-btn');
         if (viewCodeBtn) {
             e.preventDefault();
-            showProjectCodeDirectly(viewCodeBtn.dataset.repo);
+            const repoName = viewCodeBtn.dataset.repo;
+            if(repoName) {
+                showProjectCode(repoName);
+            }
         }
     });
 
     modalCloseBtn.addEventListener('click', () => modal.style.display = 'none');
     modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
-
+    
     copyCodeBtn.addEventListener('click', () => {
         const codeElement = modalBody.querySelector('pre code');
         if (codeElement) {

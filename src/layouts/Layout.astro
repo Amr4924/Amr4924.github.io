@@ -24,19 +24,23 @@ const { title } = Astro.props;
                         <span>SA3DWY</span>
                     </div>
                 </a>
+            
                 <button id="hamburger-btn" class="hamburger-btn">
                     <span class="line"></span>
                     <span class="line"></span>
                     <span class="line"></span>
                 </button>
+               
                 <ul class="nav-links" id="nav-links-menu">
                     <li><a href="/">الرئيسية</a></li>
                     <li><a href="/projects">المشاريع</a></li>
+                    <li><a href="/certificates">الشهادات</a></li>
                     <li><a href="/contact">تواصل معي</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
     <main class="container">
         <slot />
     </main>
@@ -60,14 +64,30 @@ const { title } = Astro.props;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 
     <script>
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const navLinksMenu = document.getElementById('nav-links-menu');
-        if (hamburgerBtn && navLinksMenu) {
-            hamburgerBtn.addEventListener('click', () => {
-                navLinksMenu.classList.toggle('is-open');
-                hamburgerBtn.classList.toggle('is-active');
-            });
-        }
-    </script>
+    // --- Hamburger Menu Script ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navLinksMenu = document.getElementById('nav-links-menu');
+    if (hamburgerBtn && navLinksMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+            navLinksMenu.classList.toggle('is-open');
+            hamburgerBtn.classList.toggle('is-active');
+        });
+    }
+
+    // --- Active Nav Link Script (Corrected) ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            const linkPath = link.getAttribute('href');
+            // -- FIX: Add a check to ensure linkPath is not null --
+            if (linkPath) {
+                if ((currentPath === '/' && linkPath === '/') || (linkPath !== '/' && currentPath.startsWith(linkPath))) {
+                    link.classList.add('active');
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
