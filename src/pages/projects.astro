@@ -18,7 +18,7 @@ try {
                     <h2>{project.name}</h2>
                     <p>{project.description || 'لا يوجد وصف لهذا المشروع.'}</p>
                     <div class="card-buttons">
-                        <a href="#" class="btn btn-secondary view-code-btn" data-repo={project.name}>عرض الكود</a>
+                        <button type="button" class="btn btn-secondary view-code-btn" data-repo={project.name}>عرض الكود</button>
                         <a href={project.html_url} target="_blank" class="btn btn-primary">اذهب للمشروع</a>
                     </div>
                 </div>
@@ -41,14 +41,10 @@ try {
     function decodeBase64(content) { return decodeURIComponent(window.atob(content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); }
 
     async function showCodeContent(repoName, file) {
-        // بما أننا جلبنا قائمة الملفات بالفعل، يمكننا الحصول على محتوى الملف مباشرة
         modalBody.innerHTML = '<p style="padding: 20px;">جاري تحميل الكود...</p>';
         try {
-            // لا حاجة لطلب API جديد، المحتوى موجود في الكائن file
-            // هذا يتطلب تعديل مسار الـ API ليجلب المحتوى أيضًا، لكن للتبسيط سنبقي على طلب API للمحتوى
             const contentResponse = await fetch(file.url); // Use the direct URL from the file object
             const data = await contentResponse.json();
-
             if (data.content) {
                 const decodedContent = decodeBase64(data.content);
                 const fileExtension = file.path.split('.').pop();
@@ -65,13 +61,17 @@ try {
         modalBody.innerHTML = '<p style="padding: 20px;">جاري البحث عن الملفات...</p>';
         modal.style.display = 'flex';
         try {
-            // ✨ الطلب الآن يذهب إلى مسار الـ API المحلي والآمن ✨
+            // الطلب الآن يذهب إلى مسار الـ API المحلي والآمن
             const response = await fetch(`/api/getCode?repo=${repoName}`);
-            if (!response.ok) throw new Error('API route failed');
+            if (!response.ok) {
+                // إذا فشل الطلب من السيرفر، اعرض رسالة الخطأ
+                const errorResult = await response.json();
+                throw new Error(errorResult.message || 'API route failed');
+            }
             
             const files = await response.json();
             if (!Array.isArray(files)) {
-                modalBody.innerHTML = '<p style="padding: 20px;">هذا المشروع فارغ.</p>';
+                modalBody.innerHTML = '<p style="padding: 20px;">هذا المشروع فارغ أو أن البيانات المستلمة غير صحيحة.</p>';
                 return;
             }
 
@@ -86,11 +86,12 @@ try {
                 mainFile = files.find(file => file.name.toLowerCase() === 'readme.md');
             }
             if (mainFile) {
-                await showCodeContent(repoName, mainFile); // نمرر الكائن file بالكامل
+                await showCodeContent(repoName, mainFile);
             } else {
                  modalBody.innerHTML = '<p style="padding: 20px;">لا توجد ملفات قابلة للعرض.</p>';
             }
         } catch (error) {
+            console.error("Client-side error:", error);
             modalBody.innerHTML = '<p style="padding: 20px;">حدث خطأ أثناء جلب الملفات.</p>';
         }
     }

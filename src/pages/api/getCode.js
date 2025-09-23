@@ -15,11 +15,13 @@ export async function GET({ url }) {
   try {
     const response = await fetch(contentsUrl, {
       headers: {
+        // استخدام التوكن لتوثيق الطلب
         Authorization: `token ${GITHUB_TOKEN}`
       }
     });
 
     if (!response.ok) {
+        console.error("GitHub API Error:", await response.text());
         throw new Error(`GitHub API responded with ${response.status}`);
     }
 
@@ -32,6 +34,7 @@ export async function GET({ url }) {
     });
 
   } catch (error) {
+    console.error("Server-side fetch error:", error);
     return new Response(JSON.stringify({ message: 'Failed to fetch repo contents' }), { status: 500 });
   }
 }
