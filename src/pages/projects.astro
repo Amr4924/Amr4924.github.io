@@ -13,7 +13,7 @@ try {
     <section id="projects">
         <h2 class="section-title">مشاريعي على GitHub</h2>
         <div id="projects-grid" class="projects-grid">
-            {projects.length > 0 ? projects.map((project, index) => (
+            {projects.length > 0 ? projects.map((project: { name: string; description?: string; html_url: string }, index: number) => (
                 <div class="project-card" data-aos="fade-up" data-aos-delay={index * 100}>
                     <h2>{project.name}</h2>
                     <p>{project.description || 'لا يوجد وصف لهذا المشروع.'}</p>
