@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA3DWY | المشاريع</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <nav class="main-nav">
+                 <a href="index.html" class="profile-link">
+                    <div class="profile-area">
+                        <img src="200176765.jpeg" alt="Profile Picture" class="profile-pic">
+                        <span>SA3DWY</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="projects.html" class="active">المشاريع</a></li>
+                    <li><a href="contact.html">تواصل معي</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="projects">
+            <h2 class="section-title">مشاريعي على GitHub</h2>
+            <div id="projects-container" class="projects-grid">
+                </div>
+        </section>
+    </main>
+    
+    <div id="code-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="copy-code-btn" class="copy-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                    </svg>
+                    <span>نسخ الكود</span>
+                </button>
+                <h3 id="modal-title">عرض الكود</h3>
+                <button id="modal-close-btn" class="close-btn">&times;</button>
+            </div>
+            <div id="modal-body" class="modal-body">
+                 </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="projects.js"></script>
+</body>
+</html>
