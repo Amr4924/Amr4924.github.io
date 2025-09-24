@@ -1,20 +1,22 @@
 {
+  "profilePicture": "/me.jpg",
+  "aboutMe": "A second-year student pursuing a degree in Computers and Artificial Intelligence at South Valley National University (SVNU). I'm passionate about the world of algorithms, problem-solving, and software development. I am always eager to learn new technologies and apply them to practical projects that blend creativity with technical efficiency.",
   "skills": [
-    { "name": "C++", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" },
+    { "name": "C++", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-plain.svg" },
     { "name": "Python", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" },
     { "name": "Dart", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" },
     { "name": "Git", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" },
     { "name": "GitHub", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" },
-    { "name": "Problem Solving", "icon": "https://cdn-icons-png.flaticon.com/512/3400/3400130.png" }
+    { "name": "Problem Solving", "icon": "https://api.iconify.design/game-icons/think.svg?color=white" }
   ],
   "socialLinks": [
-    { "name": "GitHub", "url": "https://github.com/Amr4924", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" },
-    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/amrsa3dwy/", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/linkedin/linkedin-plain.svg" },
-    { "name": "Facebook", "url": "https://www.facebook.com/profile.php?id=100079413693293", "icon": "https://raw.githubusercontent.com/devicons/devicon/master/icons/facebook/facebook-original.svg" },
-    { "name": "Instagram", "url": "https://www.instagram.com/3mr_sa3d7/", "icon": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" },
-    { "name": "TikTok", "url": "https://www.tiktok.com/@3mr675", "icon": "https://cdn.simpleicons.org/tiktok/FFFFFF" },
-    { "name": "Linktree", "url": "https://linktr.ee/sa3dwy", "icon": "https://cdn.simpleicons.org/linktree/FFFFFF" },
-    { "name": "Email", "url": "mailto:youremail@example.com", "icon": "https://cdn-icons-png.flaticon.com/512/732/732200.png" }
+    { "name": "GitHub", "url": "https://github.com/Amr4924", "icon": "https://api.iconify.design/mdi/github.svg?color=white" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/amrsa3dwy/", "icon": "https://api.iconify.design/mdi/linkedin.svg?color=white" },
+    { "name": "Facebook", "url": "https://www.facebook.com/profile.php?id=100079413693293", "icon": "https://api.iconify.design/mdi/facebook.svg?color=white" },
+    { "name": "Instagram", "url": "https://www.instagram.com/3mr_sa3d7/", "icon": "https://api.iconify.design/mdi/instagram.svg?color=white" },
+    { "name": "TikTok", "url": "https://www.tiktok.com/@3mr675", "icon": "https://api.iconify.design/ic/baseline-tiktok.svg?color=white" },
+    { "name": "Linktree", "url": "https://linktr.ee/sa3dwy", "icon": "https://api.iconify.design/simple-icons/linktree.svg?color=white" },
+    { "name": "Email", "url": "mailto:youremail@example.com", "icon": "https://api.iconify.design/mdi/email.svg?color=white" }
   ],
   "certificates": [
     {

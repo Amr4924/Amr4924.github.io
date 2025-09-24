@@ -4,22 +4,26 @@ import data from '../../data.json';
 ---
 <Layout title="SA3DWY | الرئيسية">
     <section id="about-me" class="about-section fade-in-up">
-        <img src="/200176765.jpeg" alt="My Picture" class="about-pic">
+        <img src={data.profilePicture} alt="My Picture" class="about-pic">
         <div class="about-text">
-            <h2>Welcome! I'm Amr (SA3DWY)</h2>
+            <div class="static-text">Hello! I'm <span>Amr (SA3DWY)</span>,</div>
+            <div class="dynamic-text">
+                <span id="typing-span"></span>
+            </div>
             <p lang="en" dir="ltr">
-                A second-year student pursuing a degree in Computers and Artificial Intelligence at South Valley National University (SVNU).
-                I'm passionate about the world of algorithms, problem-solving, and software development.
-                I am always eager to learn new technologies and apply them to practical projects that blend creativity with technical efficiency.
+                {data.aboutMe}
             </p>
         </div>
     </section>
 
     <section id="skills">
-        <h2 class="section-title fade-in-up" style="animation-delay: 200ms;">Skills & Technologies</h2>
+        <h2 class="section-title fade-in-up" style="animation-delay: 200ms;">المهارات والتقنيات</h2>
+        <p class="section-subtitle fade-in-up" style="animation-delay: 300ms;">
+            أبرز التقنيات والأدوات التي أستخدمها في تطوير المشاريع وحل المشكلات.
+        </p>
         <div class="skills-grid">
             {data.skills.map((skill, index) => (
-                <div class="skill-card fade-in-up" style={`animation-delay: ${300 + index * 100}ms`}>
+                <div class="skill-card fade-in-up" style={`animation-delay: ${400 + index * 100}ms`}>
                     <img src={skill.icon} alt={skill.name + " icon"} />
                     <span>{skill.name}</span>
                 </div>
@@ -27,3 +31,45 @@ import data from '../../data.json';
         </div>
     </section>
 </Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const typingSpan = document.getElementById('typing-span');
+        const roles = [
+            "CS & AI Student",
+            "A C++ Learner",
+            "An Open Source Enthusiast 👍"
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                // Deleting text
+                typingSpan.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                }
+            } else {
+                // Typing text
+                typingSpan.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentRole.length) {
+                    isDeleting = true;
+                    // Wait before deleting
+                    setTimeout(type, 1500);
+                    return;
+                }
+            }
+            // Adjust typing speed
+            const typingSpeed = isDeleting ? 50 : 150;
+            setTimeout(type, typingSpeed);
+        }
+
+        type();
+    });
+</script>
