@@ -36,8 +36,28 @@
     },
     {
       "title": "Marketing",
-      "issuer": "camp Gen-Z",
+      "issuer": "Camp Gen-Z",
       "imageUrl": "/certificates/Marketing.jpg"
+    },
+    {
+      "title": "Soft Skills",
+      "issuer": "Camp Gen-Z",
+      "imageUrl": "/certificates/Soft Skills.jpeg"
+    },
+    {
+      "title": "c++ basics",
+      "issuer": "Camp Gen-Z",
+      "imageUrl": "/certificates/c++.jpeg"
+    },
+    {
+      "title": "Paython basics",
+      "issuer": "Camp Gen-Z",
+      "imageUrl": "/certificates/python.jpeg"
+    },
+    {
+      "title": "Flutter basics",
+      "issuer": "Camp Gen-Z",
+      "imageUrl": "/certificates/Flutter.jpeg"
     }
   ]
 }
