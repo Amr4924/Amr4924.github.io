@@ -1,75 +1,137 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import data from '../../data.json';
----
-<Layout title="SA3DWY | الرئيسية">
-    <section id="about-me" class="about-section fade-in-up">
-        <img src={data.profilePicture} alt="My Picture" class="about-pic">
-        <div class="about-text">
-            <div class="static-text">Hello! I'm <span>Amr (SA3DWY)</span>,</div>
-            <div class="dynamic-text">
-                <span id="typing-span"></span>
-            </div>
-            <p lang="en" dir="ltr">
-                {data.aboutMe}
-            </p>
-        </div>
-    </section>
 
-    <section id="skills">
-        <h2 class="section-title fade-in-up" style="animation-delay: 200ms;">المهارات والتقنيات</h2>
-        <p class="section-subtitle fade-in-up" style="animation-delay: 300ms;">
-            أبرز التقنيات والأدوات التي أستخدمها في تطوير المشاريع وحل المشكلات.
-        </p>
-        <div class="skills-grid">
-            {data.skills.map((skill, index) => (
-                <div class="skill-card fade-in-up" style={`animation-delay: ${400 + index * 100}ms`}>
-                    <img src={skill.icon} alt={skill.name + " icon"} />
-                    <span>{skill.name}</span>
-                </div>
-            ))}
+const skillsCount = Array.isArray(data.skills) ? data.skills.length : 0;
+
+// Optional radar data (fallbacks لو مش موجودة)
+const radar = data.radar ?? {
+  confident: ["HTML", "CSS", "Git", "C++"],
+  learning: ["Astro", "Flutter", "JavaScript"],
+  exploring: ["AI", "Web Performance", "System Design"]
+};
+
+const githubUsername = "Amr4924";
+const heatmapUrl = `https://ghchart.rshah.org/${githubUsername}`;
+---
+
+<Layout title="SA3DWY | الرئيسية">
+  <section id="about-me" class="about-section fade-in-up">
+    <img src={data.profilePicture} alt="My Picture" class="about-pic">
+    <div class="about-text">
+      <div class="static-text">Hello! I'm <span>Amr (SA3DWY)</span>,</div>
+      <div class="dynamic-text">
+        <span id="typing-span"></span>
+      </div>
+      <p lang="en" dir="ltr">{data.aboutMe}</p>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/projects">شوف المشاريع</a>
+        <a class="btn btn-ghost" href="/cv">السيرة الذاتية</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Improved Skills -->
+  <section id="skills" class="skills-section">
+    <div class="skills-head fade-in-up" style="animation-delay: 200ms;">
+      <h2 class="section-title">المهارات والتقنيات</h2>
+      <p class="section-subtitle" style="animation-delay: 300ms;">
+        أبرز التقنيات والأدوات التي أستخدمها في تطوير المشاريع وحل المشكلات.
+      </p>
+
+      <div class="skills-meta" style="animation-delay: 350ms;">
+        <span class="skills-pill">عدد التقنيات: {skillsCount}</span>
+        <span class="skills-pill">مستمر في التعلّم والتحديث</span>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+      {data.skills.map((skill, index) => (
+        <article class="skill-card fade-in-up" style={`animation-delay: ${450 + index * 80}ms`}>
+          <div class="skill-icon-wrap" aria-hidden="true">
+            <img src={skill.icon} alt={`${skill.name} icon`} />
+          </div>
+          <div class="skill-info">
+            <h3 class="skill-name">{skill.name}</h3>
+            <p class="skill-hint">استخدمته في مشاريع وتطبيقات مختلفة</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ✅ Tech Stack Radar -->
+  <section id="radar" class="radar-section fade-in-up" style="animation-delay: 150ms;">
+    <h2 class="section-title">Tech Stack Radar</h2>
+    <p class="section-subtitle">تقييم واقعي: إيه اللي شاطر فيه، إيه اللي بتعلمه، وإيه اللي بتستكشفه.</p>
+
+    <div class="radar-grid">
+      <div class="radar-card">
+        <h3>Comfortable With</h3>
+        <div class="tag-wrap">
+          {radar.confident.map((t) => <span class="tag">{t}</span>)}
         </div>
-    </section>
+      </div>
+
+      <div class="radar-card">
+        <h3>Learning</h3>
+        <div class="tag-wrap">
+          {radar.learning.map((t) => <span class="tag">{t}</span>)}
+        </div>
+      </div>
+
+      <div class="radar-card">
+        <h3>Exploring</h3>
+        <div class="tag-wrap">
+          {radar.exploring.map((t) => <span class="tag">{t}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ GitHub Activity Heatmap -->
+  <section id="activity" class="activity-section fade-in-up" style="animation-delay: 200ms;">
+    <h2 class="section-title">GitHub Activity</h2>
+    <p class="section-subtitle">صورة سريعة عن الاستمرارية خلال السنة.</p>
+    <div class="activity-card">
+      <img src={heatmapUrl} alt="GitHub contribution heatmap" loading="lazy" />
+      <a class="activity-link" href="https://github.com/Amr4924" target="_blank" rel="noopener noreferrer">
+        افتح الحساب على GitHub →
+      </a>
+    </div>
+  </section>
 </Layout>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const typingSpan = document.getElementById('typing-span');
-        const roles = [
-            "CS & AI Student",
-            "A C++ Learner",
-            "An Open Source Enthusiast 👍"
-        ];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+  document.addEventListener('DOMContentLoaded', function () {
+    const typingSpan = document.getElementById('typing-span');
+    const roles = ["CS & AI Student","A C++ Learner","An Open Source Enthusiast 👍"];
+    let roleIndex = 0, charIndex = 0, isDeleting = false;
 
-        function type() {
-            const currentRole = roles[roleIndex];
-            if (isDeleting) {
-                // Deleting text
-                typingSpan.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-                if (charIndex === 0) {
-                    isDeleting = false;
-                    roleIndex = (roleIndex + 1) % roles.length;
-                }
-            } else {
-                // Typing text
-                typingSpan.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-                if (charIndex === currentRole.length) {
-                    isDeleting = true;
-                    // Wait before deleting
-                    setTimeout(type, 1500);
-                    return;
-                }
-            }
-            // Adjust typing speed
-            const typingSpeed = isDeleting ? 50 : 150;
-            setTimeout(type, typingSpeed);
-        }
+    function type() {
+      if (!typingSpan) return;
+      const currentRole = roles[roleIndex];
 
-        type();
+      if (isDeleting) {
+        typingSpan.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; }
+      } else {
+        typingSpan.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === currentRole.length) { isDeleting = true; setTimeout(type, 1500); return; }
+      }
+
+      setTimeout(type, isDeleting ? 50 : 150);
+    }
+
+    // تشغيل عند ظهور القسم فقط (أداء أحسن)
+    const el = document.getElementById('typing-span');
+    if (!el) return;
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { type(); obs.disconnect(); }
     });
+    obs.observe(el);
+  });
 </script>

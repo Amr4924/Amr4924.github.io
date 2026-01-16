@@ -3,84 +3,110 @@ import '../styles/style.css';
 import data from '../../data.json';
 
 interface Props {
-	title: string;
+  title: string;
 }
 const { title } = Astro.props;
+
+const year = new Date().getFullYear();
+const linkedinUrl = "https://www.linkedin.com/in/sa3dwy/";
+const githubUrl = "https://github.com/Amr4924";
 ---
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
-    </head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>{title}</title>
+
+  <meta name="description" content="SA3DWY Portfolio – مشاريع، شهادات، مهارات، وسيرة ذاتية.">
+  <link rel="canonical" href={Astro.url.href} />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content="ملف أعمال Amr (SA3DWY) – مشاريع برمجية ومهارات وشهادات." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url.href} />
+  <meta property="og:image" content="/og-image.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content="ملف أعمال SA3DWY – مشاريع ومهارات وشهادات." />
+</head>
+
 <body>
-    <header class="main-header" id="main-header">
-        <div class="container">
-            <nav class="main-nav">
-                <a href="/" class="profile-link">
-                    <div class="profile-area">
-                        <img src={data.profilePicture} alt="Profile Picture" class="profile-pic">
-                        <span>SA3DWY</span>
-                    </div>
-                </a>
-            
-                <button id="hamburger-btn" class="hamburger-btn">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </button>
-   
-                <ul class="nav-links" id="nav-links-menu">
-                    <li><a href="/">الرئيسية</a></li>
-                    <li><a href="/projects">المشاريع</a></li>
-                    <li><a href="/certificates">الشهادات</a></li>
-                    <li><a href="/contact">تواصل معي</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header class="main-header" id="main-header">
+    <div class="container">
+      <nav class="main-nav">
+        <a href="/" class="profile-link">
+          <div class="profile-area">
+            <img src={data.profilePicture} alt="صورة الملف الشخصي" class="profile-pic">
+            <span>SA3DWY</span>
+          </div>
+        </a>
 
-    <main class="container">
-        <slot />
-    </main>
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="فتح/غلق القائمة">
+          <span class="line"></span>
+          <span class="line"></span>
+          <span class="line"></span>
+        </button>
 
-    <script>
-    // --- Header Scroll Effect ---
+        <ul class="nav-links" id="nav-links-menu">
+          <li><a href="/">الرئيسية</a></li>
+          <li><a href="/about">رحلتي</a></li>
+          <li><a href="/projects">المشاريع</a></li>
+          <li><a href="/cv">السيرة الذاتية</a></li>
+          <li><a href="/certificates">الشهادات</a></li>
+          <li><a href="/contact">تواصل معي</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">© {year} SA3DWY (Amr). جميع الحقوق محفوظة.</p>
+
+      <div class="footer-links" aria-label="روابط التواصل">
+        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer-sep">•</span>
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
     const header = document.getElementById('main-header');
     if (header) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      });
     }
 
-    // --- Hamburger Menu Script ---
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navLinksMenu = document.getElementById('nav-links-menu');
     if (hamburgerBtn && navLinksMenu) {
-        hamburgerBtn.addEventListener('click', () => {
-            navLinksMenu.classList.toggle('is-open');
-            hamburgerBtn.classList.toggle('is-active');
-        });
+      hamburgerBtn.addEventListener('click', () => {
+        navLinksMenu.classList.toggle('is-open');
+        hamburgerBtn.classList.toggle('is-active');
+      });
     }
 
-    // --- Active Nav Link Script ---
     document.addEventListener('DOMContentLoaded', () => {
-        const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-            const linkPath = link.getAttribute('href');
-            if (linkPath) {
-                if ((currentPath === '/' && linkPath === '/') || (linkPath !== '/' && currentPath.startsWith(linkPath))) {
-                    link.classList.add('active');
-                }
-            }
-        });
+      const currentPath = window.location.pathname;
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        if (!linkPath) return;
+        if ((currentPath === '/' && linkPath === '/') || (linkPath !== '/' && currentPath.startsWith(linkPath))) {
+          link.classList.add('active');
+        }
+      });
     });
-    </script>
+  </script>
 </body>
 </html>

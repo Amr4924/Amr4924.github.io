@@ -1,18 +1,80 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import data from '../../data.json';
+
+// ضع رابط Formspree هنا لو عايز استقبال رسائل فعلي:
+// مثال: https://formspree.io/f/xxxxxxx
+const formEndpoint = data.formEndpoint ?? "";
+const mailto = data.mailto ?? "mailto:your-email@example.com?subject=Portfolio%20Message";
 ---
+
 <Layout title="SA3DWY | تواصل معي">
-    <section id="contact">
-        <h2 class="section-title fade-in-up">تواصل معي</h2>
-        <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">يمكنك متابعتي والتواصل معي عبر المنصات التالية</p>
+  <section id="contact">
+    <h2 class="section-title fade-in-up">تواصل معي</h2>
+    <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">
+      ابعت رسالة مباشرة أو تواصل عبر المنصات.
+    </p>
+
+    <div class="contact-grid">
+      <div class="contact-card fade-in-up" style="animation-delay: 200ms;">
+        <h3>أرسل رسالة</h3>
+
+        {formEndpoint ? (
+          <form class="contact-form" action={formEndpoint} method="POST">
+            <label>
+              الاسم
+              <input name="name" required placeholder="اسمك" />
+            </label>
+
+            <label>
+              البريد الإلكتروني
+              <input type="email" name="email" required placeholder="name@email.com" />
+            </label>
+
+            <label>
+              نوع الرسالة
+              <select name="type">
+                <option>Job</option>
+                <option>Freelance</option>
+                <option>Collaboration</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              الرسالة
+              <textarea name="message" rows="5" required placeholder="اكتب رسالتك هنا..."></textarea>
+            </label>
+
+            <button class="btn btn-primary" type="submit">إرسال</button>
+            <p class="form-hint">* سيتم إرسال الرسالة عبر Formspree.</p>
+          </form>
+        ) : (
+          <div class="no-form">
+            <p>لسه مش مفعّل استقبال الرسائل عبر فورم.</p>
+            <a class="btn btn-primary" href={mailto}>ابعت Email الآن</a>
+            <small>لو تحب، اربطه بـ Formspree أو Netlify Forms بسهولة.</small>
+          </div>
+        )}
+      </div>
+
+      <div class="contact-card fade-in-up" style="animation-delay: 300ms;">
+        <h3>روابط التواصل</h3>
         <div class="social-links-grid">
-            {data.socialLinks.map((link, index) => (
-                <a href={link.url} target="_blank" class="social-card fade-in-up" style={`animation-delay: ${200 + index * 100}ms`}>
-                    <img src={link.icon} alt={link.name + " icon"} />
-                    <span>{link.name}</span>
-                </a>
-            ))}
+          {data.socialLinks.map((link, index) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-card"
+              style={`animation-delay: ${350 + index * 80}ms`}
+            >
+              <img src={link.icon} alt={link.name + " icon"} />
+              <span>{link.name}</span>
+            </a>
+          ))}
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </Layout>

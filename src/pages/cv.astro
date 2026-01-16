@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import data from '../../data.json';
+
+const cv = data.cv ?? {
+  name: "Amr (SA3DWY)",
+  title: "CS & AI Student",
+  summary: "طالب علوم حاسب وذكاء اصطناعي، مهتم ببناء مشاريع عملية وتعلم تقنيات حديثة.",
+  skills: (data.skills ?? []).map(s => s.name).slice(0, 12),
+  links: [
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/sa3dwy/" },
+    { name: "GitHub", url: "https://github.com/Amr4924" },
+  ],
+  education: ["Computer Science & AI (Student)"],
+  highlights: ["بناء مواقع باستخدام Astro", "أساس قوي في C++", "مهتم بالأداء وتحسين تجربة المستخدم"]
+};
+---
+
+<Layout title="SA3DWY | السيرة الذاتية">
+  <section class="page-head fade-in-up">
+    <h2 class="section-title">السيرة الذاتية</h2>
+    <p class="section-subtitle">تقدر تضغط زر “طباعة” وتحفظها PDF مباشرة.</p>
+
+    <div class="cv-actions">
+      <button class="btn btn-primary" id="print-cv">طباعة / حفظ PDF</button>
+      <a class="btn btn-ghost" href="/contact">تواصل معي</a>
+    </div>
+  </section>
+
+  <section class="cv-sheet" id="cv-sheet">
+    <div class="cv-top">
+      <div>
+        <h1 class="cv-name">{cv.name}</h1>
+        <p class="cv-title">{cv.title}</p>
+      </div>
+
+      <div class="cv-links">
+        {cv.links.map((l) => (
+          <a href={l.url} target="_blank" rel="noopener noreferrer">{l.name}</a>
+        ))}
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h3>ملخص</h3>
+      <p>{cv.summary}</p>
+    </div>
+
+    <div class="cv-grid">
+      <div class="cv-block">
+        <h3>Skills</h3>
+        <div class="tag-wrap">
+          {cv.skills.map((t) => <span class="tag">{t}</span>)}
+        </div>
+      </div>
+
+      <div class="cv-block">
+        <h3>Education</h3>
+        <ul class="case-list">
+          {cv.education.map((e) => <li>{e}</li>)}
+        </ul>
+      </div>
+
+      <div class="cv-block">
+        <h3>Highlights</h3>
+        <ul class="case-list">
+          {cv.highlights.map((h) => <li>{h}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const btn = document.getElementById('print-cv');
+    if (btn) btn.addEventListener('click', () => window.print());
+  </script>
+</Layout>

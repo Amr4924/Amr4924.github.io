@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import data from '../../../data.json';
+
+const { slug } = Astro.params;
+
+const cases = data.projectCaseStudies ?? [];
+const project = cases.find((p) => (p.slug || "").toLowerCase() === (slug || "").toLowerCase());
+---
+
+<Layout title={`SA3DWY | ${project ? project.title : "Case Study"}`}>
+  <section class="page-head fade-in-up">
+    <h2 class="section-title">{project ? project.title : "Case Study غير متوفر"}</h2>
+    <p class="section-subtitle">
+      {project ? project.subtitle : "لسه مش مضاف للمشروع ده تفاصيل. أضفها في data.json وهتظهر تلقائيًا."}
+    </p>
+  </section>
+
+  {project ? (
+    <section class="case-section">
+      <div class="case-grid">
+        <div class="case-card">
+          <h3>المشكلة</h3>
+          <p>{project.problem}</p>
+        </div>
+        <div class="case-card">
+          <h3>الحل</h3>
+          <p>{project.solution}</p>
+        </div>
+        <div class="case-card">
+          <h3>التقنيات</h3>
+          <div class="tag-wrap">
+            {project.tech.map((t) => <span class="tag">{t}</span>)}
+          </div>
+        </div>
+        <div class="case-card">
+          <h3>التحديات</h3>
+          <ul class="case-list">
+            {project.challenges.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+        <div class="case-card">
+          <h3>النتائج</h3>
+          <ul class="case-list">
+            {project.results.map((r) => <li>{r}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="case-actions">
+        {project.github ? <a class="btn btn-primary" href={project.github} target="_blank" rel="noopener noreferrer">GitHub</a> : null}
+        {project.demo ? <a class="btn btn-ghost" href={project.demo} target="_blank" rel="noopener noreferrer">Live Demo</a> : null}
+        <a class="btn btn-soft" href="/projects">رجوع للمشاريع</a>
+      </div>
+    </section>
+  ) : (
+    <div class="error-message">
+      <h3>لسه مفيش تفاصيل للمشروع ده</h3>
+      <p>أضف Case Study في data.json داخل projectCaseStudies.</p>
+      <a class="btn btn-primary" href="/projects">رجوع للمشاريع</a>
+    </div>
+  )}
+</Layout>

@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import data from '../../data.json';
+
+// Optional timeline data
+const timeline = data.timeline ?? [
+  { year: "2024", title: "بداية الرحلة", desc: "بدأت ببناء أساس قوي في البرمجة + مفاهيم الشبكات." },
+  { year: "2025", title: "مشاريع وتطبيق عملي", desc: "طبّقت في مشاريع متنوعة وتعلمت كتابة كود أنظف." },
+  { year: "2026", title: "تخصص وتطوير", desc: "مركز على Frontend + تحسين الأداء + بناء بورتفوليو قوي." },
+];
+---
+
+<Layout title="SA3DWY | رحلتي">
+  <section class="page-head fade-in-up">
+    <h2 class="section-title">رحلتي</h2>
+    <p class="section-subtitle">قصة مختصرة: من التعلم إلى التنفيذ… والخطوة الجاية.</p>
+  </section>
+
+  <section class="timeline-section">
+    <div class="timeline">
+      {timeline.map((item, i) => (
+        <div class="timeline-item fade-in-up" style={`animation-delay:${150 + i*100}ms`}>
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-year">{item.year}</span>
+              <h3 class="timeline-title">{item.title}</h3>
+            </div>
+            <p class="timeline-desc">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="about-cta fade-in-up" style="animation-delay:500ms">
+      <a class="btn btn-primary" href="/projects">شوف المشاريع</a>
+      <a class="btn btn-ghost" href="/contact">تواصل معي</a>
+    </div>
+  </section>
+</Layout>

@@ -1,133 +1,130 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import data from '../../data.json';
 
-// --- GitHub API Configuration ---
 const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 const USERNAME = 'Amr4924';
 const API_URL = `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=100`;
 
-// --- Fetch Projects from GitHub ---
 let projects = [];
 let fetchError = null;
+
 try {
-    if (!GITHUB_TOKEN) {
-        throw new Error("GITHUB_TOKEN is not configured in your .env file.");
-    }
-    const response = await fetch(API_URL, {
-        headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-            'User-Agent': 'Astro-Portfolio'
-        }
-    });
-    if (response.ok) {
-        const allProjects = await response.json();
-        if (Array.isArray(allProjects)) {
-            projects = allProjects; // Keep all projects initially, we will filter them safely before rendering
-        } else {
-            throw new Error("Received unexpected data format from GitHub. Check your token permissions or API status.");
-        }
-    } else {
-        const errorData = await response.json();
-        throw new Error(`Failed to fetch from GitHub: ${errorData.message}`);
-    }
+  if (!GITHUB_TOKEN) throw new Error("GITHUB_TOKEN is not configured in your .env file.");
+  const response = await fetch(API_URL, {
+    headers: { Authorization: `token ${GITHUB_TOKEN}`, 'User-Agent': 'Astro-Portfolio' }
+  });
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(`Failed to fetch from GitHub: ${err.message}`);
+  }
+  const all = await response.json();
+  if (!Array.isArray(all)) throw new Error("Unexpected GitHub data format.");
+  projects = all;
 } catch (error) {
-    console.error("Build-time fetch failed:", error);
-    fetchError = error instanceof Error ? error.message : String(error);
+  console.error("Build-time fetch failed:", error);
+  fetchError = error instanceof Error ? error.message : String(error);
 }
 
-// --- Language to Icon Mapping ---
+// Optional demo map from data.json
+const demos = data.projectDemos ?? {}; // { "repoName": "https://demo-link" }
+
 const languageIcons = {
-    "C++": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg",
-    "Python": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
-    "JavaScript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
-    "Dart": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg",
-    "HTML": "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",
-    "CSS": "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
-    "Java": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
-    "TypeScript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
-    "Astro": "https://raw.githubusercontent.com/devicons/devicon/master/icons/astro/astro-original.svg",
+  "C++": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg",
+  "Python": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
+  "JavaScript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
+  "Dart": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg",
+  "HTML": "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",
+  "CSS": "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
+  "Java": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
+  "TypeScript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
+  "Astro": "https://raw.githubusercontent.com/devicons/devicon/master/icons/astro/astro-original.svg",
 };
 const defaultIcon = "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg";
+
+const safeProjects = projects.filter(p => p && p.id && !p.fork);
 ---
 
 <Layout title="SA3DWY | المشاريع">
-    <section id="projects">
-        <h2 class="section-title fade-in-up">مشاريعي على GitHub</h2>
-        <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">
-            هذه أحدث المشاريع التي أعمل عليها، يتم جلبها مباشرة من حسابي.
-        </p>
-        <div id="projects-grid" class="projects-grid">
-            {fetchError ? (
-                <div class="error-message">
-                    <h3>عفوًا، حدث خطأ</h3>
-                    <p>{fetchError}</p>
-                    <small>Please ensure your GITHUB_TOKEN is set correctly in the .env file.</small>
-                </div>
-            ) : projects.length > 0 ? (
-                projects
-                    /* --- FIX: Filter out any invalid project objects before trying to render them --- */
-                    .filter(project => project && project.id && !project.fork)
-                    .map((project, index) => (
-                        <div class="project-card fade-in-up" style={`animation-delay: ${200 + index * 100}ms`}>
-                            <div class="project-image-container project-icon-bg">
-                                <img
-                                    src={languageIcons[project.language as keyof typeof languageIcons] || defaultIcon}
-                                    alt={`أيقونة ${project.language || 'GitHub'}`}
-                                    class="project-icon"
-                                />
-                            </div>
-                            <div class="project-content">
-                                <div class="project-header">
-                                    <h2>{project.name}</h2>
-                                    {project.language && <span class="project-language">{project.language}</span>}
-                                </div>
-                                <p>{project.description || 'لا يوجد وصف لهذا المشروع.'}</p>
-                                <a href={project.html_url} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                    عرض على GitHub
-                                </a>
-                            </div>
-                        </div>
-                    ))
-            ) : (
-                <div class="error-message"><h3>لا توجد مشاريع لعرضها حاليًا.</h3></div>
-            )}
+  <section id="projects">
+    <h2 class="section-title fade-in-up">مشاريعي على GitHub</h2>
+    <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">
+      أحدث المشاريع التي أعمل عليها — مع روابط GitHub و (Demo) إن وُجد.
+    </p>
+
+    <div class="projects-grid">
+      {fetchError ? (
+        <div class="error-message">
+          <h3>عفوًا، حدث خطأ</h3>
+          <p>{fetchError}</p>
+          <small>تأكد من إضافة GITHUB_TOKEN في ملف .env</small>
         </div>
-    </section>
+      ) : safeProjects.length > 0 ? (
+        safeProjects.map((project, index) => {
+          const demoUrl = demos[project.name];
+          const slug = project.name.toLowerCase();
+          return (
+            <div class="project-card fade-in-up" style={`animation-delay: ${200 + index * 80}ms`}>
+              <div class="project-image-container project-icon-bg">
+                <img
+                  src={languageIcons[project.language as keyof typeof languageIcons] || defaultIcon}
+                  alt={`أيقونة ${project.language || 'GitHub'}`}
+                  class="project-icon"
+                />
+              </div>
+
+              <div class="project-content">
+                <div class="project-header">
+                  <h2>{project.name}</h2>
+                  {project.language && <span class="project-language">{project.language}</span>}
+                </div>
+
+                <p>{project.description || 'لا يوجد وصف لهذا المشروع.'}</p>
+
+                <div class="project-actions">
+                  <a href={project.html_url} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    GitHub
+                  </a>
+
+                  {demoUrl ? (
+                    <a href={demoUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                      Live Demo
+                    </a>
+                  ) : null}
+
+                  <a href={`/project/${slug}`} class="btn btn-soft">
+                    Case Study
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <div class="error-message"><h3>لا توجد مشاريع لعرضها حاليًا.</h3></div>
+      )}
+    </div>
+  </section>
 </Layout>
 
 <style>
-/* Styles remain the same */
 .project-icon-bg {
-    background-color: #162033;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #162033;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.project-icon {
-    /* Set a fixed, centered size for the icon */
-    width: 96px;
-    height: 96px;
-    object-fit: contain;
-    /* Re-add the transition for the hover effect */
-    transition: transform 0.4s ease;
-}
-.project-card:hover .project-icon {
-    transform: scale(1.1);
-}
+.project-icon { width: 96px; height: 96px; object-fit: contain; transition: transform 0.4s ease; }
+.project-card:hover .project-icon { transform: scale(1.1); }
 .error-message {
-    background-color: var(--surface-color);
-    color: var(--text-muted-color);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    grid-column: 1 / -1;
+  background-color: var(--surface-color);
+  color: var(--text-muted-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  grid-column: 1 / -1;
 }
-.error-message small {
-    display: block;
-    margin-top: 15px;
-    color: var(--text-muted-color);
-    opacity: 0.7;
-}
+.project-actions { display: grid; gap: 10px; grid-template-columns: 1fr; }
 </style>
