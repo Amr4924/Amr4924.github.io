@@ -1,10 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import Layout from '../layouts/Layout.astro';import ProjectCard from '../components/ProjectCard.astro';
 import AppScreenArt from '../components/AppScreenArt.astro';
 import siteData from '../../data.json';
 
-const featuredSlugs = ['aura-timepieces', 'm-jewellery', 'ai-lecture-noter'];
+const featuredSlugs = ['aura-timepieces', 'm-jewellery', 'tech-school'];
 const featured = featuredSlugs
   .map(slug => siteData.projects.find(p => p.slug === slug))
   .filter(Boolean);
@@ -64,7 +63,7 @@ const projectCount = siteData.projects.length;
     <div class="section-head reveal">
       <span class="section-eyebrow">Selected Work</span>
       <h2 class="section-title">أبرز المشاريع</h2>
-      <p class="section-subtitle">تشكيلة من تطبيقات Flutter الحقيقية اللي بنيتها، وتجربة واحدة برا الموبايل بتدمج AI APIs.</p>
+      <p class="section-subtitle">تشكيلة من تطبيقات Flutter الحقيقية اللي بنيتها</p>
     </div>
     <div class="projects-grid reveal-group">
       {featured.map((project: any, i: number) => <ProjectCard project={project} index={i} />)}
