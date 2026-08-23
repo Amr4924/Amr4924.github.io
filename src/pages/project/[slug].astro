@@ -27,16 +27,26 @@ const cs = project.caseStudy;
 
   {project.category === 'flutter' ? (
     <div class="case-gallery reveal-group">
-      {[1, 2, 3].map((v: any) => (
+      {project.image ? (
         <div class="frame-shot reveal">
-          <DeviceFrame project={project} variant={v as 1 | 2 | 3} size="large" />
+          <DeviceFrame project={project} size="large" />
         </div>
-      ))}
+      ) : (
+        [1, 2, 3].map((v: any) => (
+          <div class="frame-shot reveal">
+            <DeviceFrame project={project} variant={v as 1 | 2 | 3} size="large" />
+          </div>
+        ))
+      )}
     </div>
   ) : (
     <div class="case-gallery is-web reveal-group">
       <div class="frame-shot reveal" style="aspect-ratio:16/9; grid-column: 1 / -1;">
-        <CoverArt icon={project.coverIcon} label={project.name} tone={project.coverTone} />
+        {project.image ? (
+          <img src={project.image} alt={project.name} class="real-screenshot" loading="lazy" />
+        ) : (
+          <CoverArt icon={project.coverIcon} label={project.name} tone={project.coverTone} />
+        )}
       </div>
     </div>
   )}

@@ -4,54 +4,139 @@
   "role": "Flutter Developer | CS & AI Student",
   "profilePicture": "/me.jpg",
   "heroPicture": "/me.jpg",
-
   "aboutMe": {
     "lede": "طالب Computer Science & AI في جامعة South Valley الأهلية. بدأت بـ C++ كأساس، وبعدها اتجهت بجدية لـ Flutter. بشتغل على تطبيقات حقيقية بحس تصميم واهتمام بالتفاصيل، وهدفي إني أوصل لمرحلة أدمج فيها الـ AI جوه التطبيقات اللي بعملها.",
-    "story":"بدأت رحلتي البرمجية مع C++، ومنها بنيت أساساً قوياً في التفكير المنطقي، وهياكل البيانات، وحل المشكلات قبل الانتقال إلى أي Framework.مع Flutter، تحولت المفاهيم إلى منتجات وتطبيقات متكاملة؛ الهدف منها ليس مجرد كود يعمل، بل تقديم تجربة مستخدم سلسة واحترافية. طبّقت ده عملياً في مشاريع متنوعة: تطبيقات تجارة إلكترونية متخصصة (ساعات ومجوهرات)، منصة تعليم إلكتروني، وتطبيقات لإدارة المهام والإنتاجية.شغفي الحالي هو دمج هذا الأساس مع تقنيات الذكاء الاصطناعي (AI)؛ لبناء تطبيقات ذكية تتفاعل مع المستخدم بكفاءة، وتجمع بين واجهة Flutter القوية والمعالجة الذكية في الخلفية.",
-      "timeline": [
-      { "stage": "الأساس", "title": "C++ وأساسيات البرمجة", "desc": "بدأت بـ C++، وركزت على المنطق وحل المشكلات قبل أي framework." },
-      { "stage": "أول تطبيق كبير", "title": "Tech School — منصة تعليم إلكتروني", "desc": "أكبر مشروع Flutter ليّا وقتها: شاشات كتير مبنية بـ setState وبيانات mock. ده اللي وريني احتياجي الحقيقي لـ state management." },
-      { "stage": "إدارة الحالة", "title": "التعلم الجاد لـ Provider ثم BLoC", "desc": "بعد Tech School، اتجهت أتعلم Provider، وبعدها BLoC/Cubit، عشان أدير حالة التطبيق صح بدل setState." },
-      { "stage": "مشاريع E-commerce", "title": "Aura Timepieces و M-Jewellery", "desc": "طبقت اللي اتعلمته في تطبيقين تسوق حقيقيين — واحد لساعات وواحد لمجوهرات بدعم لغتين، مع إعادة هيكلة كود قائم بمعمارية feature-first." },
-      { "stage": "الهدف الجاي", "title": "دمج AI جوه تطبيقات Flutter", "desc": "الخطوة الجاية إني أوصل اللي اتعلمته في الـ AI APIs بمشاريع Flutter نفسها، مش تطبيقين منفصلين." }
+    "story": "بدأت رحلتي البرمجية مع C++، ومنها بنيت أساساً قوياً في التفكير المنطقي، وهياكل البيانات، وحل المشكلات قبل الانتقال إلى أي Framework.مع Flutter، تحولت المفاهيم إلى منتجات وتطبيقات متكاملة؛ الهدف منها ليس مجرد كود يعمل، بل تقديم تجربة مستخدم سلسة واحترافية. طبّقت ده عملياً في مشاريع متنوعة: تطبيقات تجارة إلكترونية متخصصة (ساعات ومجوهرات)، منصة تعليم إلكتروني، وتطبيقات لإدارة المهام والإنتاجية.شغفي الحالي هو دمج هذا الأساس مع تقنيات الذكاء الاصطناعي (AI)؛ لبناء تطبيقات ذكية تتفاعل مع المستخدم بكفاءة، وتجمع بين واجهة Flutter القوية والمعالجة الذكية في الخلفية.",
+    "timeline": [
+      {
+        "stage": "الأساس",
+        "title": "C++ وأساسيات البرمجة",
+        "desc": "بدأت بـ C++، وركزت على المنطق وحل المشكلات قبل أي framework."
+      },
+      {
+        "stage": "أول تطبيق كبير",
+        "title": "Tech School — منصة تعليم إلكتروني",
+        "desc": "أكبر مشروع Flutter ليّا وقتها: شاشات كتير مبنية بـ setState وبيانات mock. ده اللي وريني احتياجي الحقيقي لـ state management."
+      },
+      {
+        "stage": "إدارة الحالة",
+        "title": "التعلم الجاد لـ Provider ثم BLoC",
+        "desc": "بعد Tech School، اتجهت أتعلم Provider، وبعدها BLoC/Cubit، عشان أدير حالة التطبيق صح بدل setState."
+      },
+      {
+        "stage": "مشاريع E-commerce",
+        "title": "Aura Timepieces و M-Jewellery",
+        "desc": "طبقت اللي اتعلمته في تطبيقين تسوق حقيقيين — واحد لساعات وواحد لمجوهرات بدعم لغتين، مع إعادة هيكلة كود قائم بمعمارية feature-first."
+      },
+      {
+        "stage": "الهدف الجاي",
+        "title": "دمج AI جوه تطبيقات Flutter",
+        "desc": "الخطوة الجاية إني أوصل اللي اتعلمته في الـ AI APIs بمشاريع Flutter نفسها، مش تطبيقين منفصلين."
+      }
     ],
     "radar": {
-      "confident": ["Dart", "Flutter", "C++", "Git & GitHub"],
-      "learning": ["Provider", "BLoC / Cubit", "بنية Feature-first", "ربط تطبيقات بـ Backend / API"],
-      "exploring": ["AI APIs (Whisper, Gemini)", "Python لتطبيقات الـ AI", "دمج AI جوه Flutter"]
+      "confident": [
+        "Dart",
+        "Flutter",
+        "C++",
+        "Git & GitHub"
+      ],
+      "learning": [
+        "Provider",
+        "BLoC / Cubit",
+        "بنية Feature-first",
+        "ربط تطبيقات بـ Backend / API"
+      ],
+      "exploring": [
+        "AI APIs (Whisper, Gemini)",
+        "Python لتطبيقات الـ AI",
+        "دمج AI جوه Flutter"
+      ]
     }
   },
-
   "skills": {
     "languages": [
-      { "name": "Flutter", "icon": "https://api.iconify.design/simple-icons/flutter.svg?color=%23f3ece1" },
-      { "name": "Dart", "icon": "https://api.iconify.design/simple-icons/dart.svg?color=%23f3ece1" },
-      { "name": "C++", "icon": "https://api.iconify.design/simple-icons/cplusplus.svg?color=%23f3ece1" },
-      { "name": "Python", "icon": "https://api.iconify.design/simple-icons/python.svg?color=%23f3ece1" }
+      {
+        "name": "Flutter",
+        "icon": "https://api.iconify.design/simple-icons/flutter.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Dart",
+        "icon": "https://api.iconify.design/simple-icons/dart.svg?color=%23f3ece1"
+      },
+      {
+        "name": "C++",
+        "icon": "https://api.iconify.design/simple-icons/cplusplus.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Python",
+        "icon": "https://api.iconify.design/simple-icons/python.svg?color=%23f3ece1"
+      }
     ],
     "tools": [
-      { "name": "Android Studio", "icon": "https://api.iconify.design/simple-icons/androidstudio.svg?color=%23f3ece1" },
-      { "name": "VS Code", "icon": "https://api.iconify.design/simple-icons/visualstudiocode.svg?color=%23f3ece1" },
-      { "name": "Figma", "icon": "https://api.iconify.design/simple-icons/figma.svg?color=%23f3ece1" },
-      { "name": "Git", "icon": "https://api.iconify.design/simple-icons/git.svg?color=%23f3ece1" },
-      { "name": "GitHub", "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23f3ece1" }
+      {
+        "name": "Android Studio",
+        "icon": "https://api.iconify.design/simple-icons/androidstudio.svg?color=%23f3ece1"
+      },
+      {
+        "name": "VS Code",
+        "icon": "https://api.iconify.design/simple-icons/visualstudiocode.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Figma",
+        "icon": "https://api.iconify.design/simple-icons/figma.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Git",
+        "icon": "https://api.iconify.design/simple-icons/git.svg?color=%23f3ece1"
+      },
+      {
+        "name": "GitHub",
+        "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23f3ece1"
+      }
     ]
   },
-
   "socialLinks": {
     "primary": [
-      { "name": "GitHub", "url": "https://github.com/Amr4924", "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23f3ece1" },
-      { "name": "LinkedIn", "url": "https://www.linkedin.com/in/sa3dwy", "icon": "https://api.iconify.design/simple-icons/linkedin.svg?color=%23f3ece1" },
-      { "name": "Email", "url": "mailto:amrsaad0016a@gmail.com", "icon": "https://api.iconify.design/lucide/mail.svg?color=%23f3ece1" }
+      {
+        "name": "GitHub",
+        "url": "https://github.com/Amr4924",
+        "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23f3ece1"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/sa3dwy",
+        "icon": "https://api.iconify.design/simple-icons/linkedin.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Email",
+        "url": "mailto:amrsaad0016a@gmail.com",
+        "icon": "https://api.iconify.design/lucide/mail.svg?color=%23f3ece1"
+      }
     ],
     "more": [
-      { "name": "Linktree", "url": "https://linktr.ee/sa3dwy", "icon": "https://api.iconify.design/simple-icons/linktree.svg?color=%23f3ece1" },
-      { "name": "Facebook", "url": "https://www.facebook.com/S3adwy", "icon": "https://api.iconify.design/simple-icons/facebook.svg?color=%23f3ece1" },
-      { "name": "Instagram", "url": "https://www.instagram.com/sa3dwy.dev/", "icon": "https://api.iconify.design/simple-icons/instagram.svg?color=%23f3ece1" },
-      { "name": "TikTok", "url": "https://www.tiktok.com/@3mr675", "icon": "https://api.iconify.design/simple-icons/tiktok.svg?color=%23f3ece1" }
+      {
+        "name": "Linktree",
+        "url": "https://linktr.ee/sa3dwy",
+        "icon": "https://api.iconify.design/simple-icons/linktree.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Facebook",
+        "url": "https://www.facebook.com/S3adwy",
+        "icon": "https://api.iconify.design/simple-icons/facebook.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Instagram",
+        "url": "https://www.instagram.com/sa3dwy.dev/",
+        "icon": "https://api.iconify.design/simple-icons/instagram.svg?color=%23f3ece1"
+      },
+      {
+        "name": "TikTok",
+        "url": "https://www.tiktok.com/@3mr675",
+        "icon": "https://api.iconify.design/simple-icons/tiktok.svg?color=%23f3ece1"
+      }
     ]
   },
-
   "projects": [
     {
       "slug": "aura-timepieces",
@@ -62,12 +147,24 @@
       "status": "قيد التطوير",
       "coverIcon": "https://api.iconify.design/lucide/watch.svg?color=%23f3ece1",
       "coverTone": "rose",
-      "tech": ["Flutter", "Dart", "Provider"],
-      "links": { "demo": "" },
+      "image": "/projects/aura-timepieces.png",
+      "tech": [
+        "Flutter",
+        "Dart",
+        "Provider"
+      ],
+      "links": {
+        "demo": "https://www.mediafire.com/file/7xdog2wl3zyun5i/Aura_Timepieces-v1.1.apk/file"
+      },
       "caseStudy": {
         "problem": "عايز تطبيق تسوق يحس المستخدم فيه إنه بيتصفح متجر ساعات فاخر من غير ما يتجبر يعمل حساب من أول خطوة، وفي نفس الوقت يحافظ على أمان العملية لما يوصل لمرحلة الدفع.",
         "approach": "بنيت نظام Auth بـ Provider يسمح بالتصفح كـ Guest، وبيتفعّل بس عند خطوة الـ Checkout والصفحات الشخصية زي الـ Favorites. وبعد ما كبر المشروع، أعدت هيكلته بالكامل من تقسيم حسب النوع (types/navigation) لبنية feature-first (lib/features/&lt;feature&gt;) عشان كل ميزة تبقى وحدة مستقلة سهل أضيف وأعدّل عليها.",
-        "features": ["تصفح كـ Guest لحد الـ Checkout", "Real-time password strength validation في التسجيل", "معمارية Feature-first قابلة للتوسع", "صفحة Favorites مربوطة بحالة تسجيل الدخول"],
+        "features": [
+          "تصفح كـ Guest لحد الـ Checkout",
+          "Real-time password strength validation في التسجيل",
+          "معمارية Feature-first قابلة للتوسع",
+          "صفحة Favorites مربوطة بحالة تسجيل الدخول"
+        ],
         "result": "أكبر تحدي كان إعادة هيكلة مشروع شغال بالفعل من غير ما أكسر حاجة — قسمتها feature بعد التانية بدل ما أعيد كتابة كل حاجة مرة واحدة."
       }
     },
@@ -80,12 +177,24 @@
       "status": "قيد التطوير النشط",
       "coverIcon": "https://api.iconify.design/lucide/gem.svg?color=%23f3ece1",
       "coverTone": "gold",
-      "tech": ["Flutter", "Dart", "Provider"],
-      "links": { "demo": "" },
+      "image": "",
+      "tech": [
+        "Flutter",
+        "Dart",
+        "Provider"
+      ],
+      "links": {
+        "demo": "https://github.com/Amr4924/M-Jewellery/releases/tag/M-Jewellery-v1.0.0-demo"
+      },
       "caseStudy": {
         "problem": "عايز متجر مجوهرات يحس المستخدم إنه شغل احترافي من أول شاشة، ويشتغل صح بالعربي والإنجليزي مع بعض من غير تعارض في الاتجاه أو الخط.",
         "approach": "بنيت الواجهة بدعم كامل للغتين، وعملت Onboarding متحرك بكاروسيلات متعددة. لما وصلت لإدارة الحالة، استخدمت Provider (ChangeNotifierProvider + Consumer/Selector + MultiProvider) للسلة والإشعارات بدل ما اسيبها StatefulWidget بسيطة.",
-        "features": ["دعم كامل لواجهة عربي/إنجليزي", "Onboarding متحرك بكاروسيلات", "سلة وإشعارات بـ Provider", "Mock authentication"],
+        "features": [
+          "دعم كامل لواجهة عربي/إنجليزي",
+          "Onboarding متحرك بكاروسيلات",
+          "سلة وإشعارات بـ Provider",
+          "Mock authentication"
+        ],
         "result": "لقيت وأصلحت bug حقيقي في فورم إنشاء الحساب — حقل الموبايل كان متوصل غلط بـ controller الباسورد بدل الـ controller بتاعه. حاليًا بركّز على إدارة الحالة، والخطوة الجاية هي ربط المشروع بـ backend حقيقي."
       }
     },
@@ -98,12 +207,24 @@
       "status": "مكتمل",
       "coverIcon": "https://api.iconify.design/lucide/graduation-cap.svg?color=%23f3ece1",
       "coverTone": "rose",
-      "tech": ["Flutter", "Dart"],
-      "links": { "demo": "" },
+      "image": "",
+      "tech": [
+        "Flutter",
+        "Dart"
+      ],
+      "links": {
+        "demo": ""
+      },
       "caseStudy": {
         "problem": "عايز أبني تطبيق بعدد شاشات وميزات كبير يقارب حجم منصة تعليم حقيقية، عشان أتمرن على تنظيم مشروع كبير مش بس شاشة أو اتنين.",
         "approach": "بنيت كل الشاشات دي بـ StatefulWidget وsetState وبيانات mock — ده كان قبل ما أتعلم Provider وBLoC.",
-        "features": ["Onboarding ولوجين", "Dashboard رئيسي", "كتالوج كورسات", "سلة ومفضلة وإشعارات", "بروفايل المستخدم"],
+        "features": [
+          "Onboarding ولوجين",
+          "Dashboard رئيسي",
+          "كتالوج كورسات",
+          "سلة ومفضلة وإشعارات",
+          "بروفايل المستخدم"
+        ],
         "result": "المشروع ده تحديدًا هو اللي وريني ليه محتاج state management حقيقي، وخلاني أتوجه بعده أتعلم Provider وBLoC بدل ما فضل معتمد على setState في مشاريع أكبر."
       }
     },
@@ -116,12 +237,21 @@
       "status": "مشروع تدريبي مكتمل",
       "coverIcon": "https://api.iconify.design/lucide/shopping-bag.svg?color=%23f3ece1",
       "coverTone": "gold",
-      "tech": ["Flutter", "Dart"],
-      "links": { "demo": "" },
+      "image": "",
+      "tech": [
+        "Flutter",
+        "Dart"
+      ],
+      "links": {
+        "demo": ""
+      },
       "caseStudy": {
         "problem": "المشروع كان تطبيق تخرّج من كورس Sprints، والهدف إني أطبّق اللي اتعلمته في مشروع متكامل من الصفر مش تمارين منفصلة.",
         "approach": "بعد أول نسخة، راجعت الكود بالكامل وصلحت مشاكل في الـ navigation واتجاه الـ scroll وبنية الـ widgets، وضفت screenshots حقيقية للمشروع بدل الـ placeholders.",
-        "features": ["تدفق تسوق كامل: تصفح، سلة، شراء", "مراجعة شاملة وتحسين بعد أول نسخة"],
+        "features": [
+          "تدفق تسوق كامل: تصفح، سلة، شراء",
+          "مراجعة شاملة وتحسين بعد أول نسخة"
+        ],
         "result": "لسه في خطتي أحسّن الـ transitions وأصلح الـ localization في نسخة جاية."
       }
     },
@@ -134,27 +264,85 @@
       "status": "مكتمل",
       "coverIcon": "https://api.iconify.design/lucide/list-checks.svg?color=%23f3ece1",
       "coverTone": "rose",
-      "tech": ["Flutter", "Dart"],
-      "links": { "demo": "" },
+      "image": "",
+      "tech": [
+        "Flutter",
+        "Dart"
+      ],
+      "links": {
+        "demo": "https://github.com/Amr4924/HabitsAndTasks/releases/tag/v1.0.0-demo"
+      },
       "caseStudy": {
         "problem": "احتاج مكان بسيط يقدر فيه المستخدم يتابع مهامه وعاداته اليومية من غير تعقيد في الواجهة.",
         "approach": "ركزت على واجهة نضيفة وسهلة الاستخدام، وضفت تحديثات وميزات جديدة بعد الإصدار الأول بناءً على تجربة الاستخدام.",
-        "features": ["إضافة وتتبع المهام اليومية", "واجهة بسيطة ومباشرة"],
+        "features": [
+          "إضافة وتتبع المهام اليومية",
+          "واجهة بسيطة ومباشرة"
+        ],
         "result": "أول مشروع كمّلته بميزات إضافية بعد الإصدار الأول بدل ما أسيبه عند أول نسخة شغالة."
       }
     }
   ],
-
   "certificates": [
-    { "title": "Mobile Development By Flutter", "issuer": "منصة Sprints", "category": "تقني", "imageUrl": "/certificates/Mobile_dev.jpg" },
-    { "title": "Cloud Essentials", "issuer": "  NTI", "category": "تقني", "imageUrl": "/certificates/NTI_cloude.jpg" },
-    { "title": "مقدمة في البرمجة باستخدام Python", "issuer": "منصة ITI", "category": "تقني", "imageUrl": "/certificates/python.jpg" },
-    { "title": "الذكاء الاصطناعي للجميع", "issuer": "منصة ITI", "category": "تقني", "imageUrl": "/certificates/AI.png" },
-    { "title": "Computer Networks", "issuer": "منصة ITI", "category": "تقني", "imageUrl": "/certificates/Network.jpg" },
-    { "title": "C++ Basics", "issuer": "Camp Gen-Z", "category": "تقني", "imageUrl": "/certificates/c++.jpeg" },
-    { "title": "Python Basics", "issuer": "Camp Gen-Z", "category": "تقني", "imageUrl": "/certificates/Python.jpeg" },
-    { "title": "Flutter Basics", "issuer": "Camp Gen-Z", "category": "تقني", "imageUrl": "/certificates/Flutter.jpeg" },
-    { "title": "Marketing", "issuer": "Camp Gen-Z", "category": "مهارات عامة", "imageUrl": "/certificates/Marketing.jpg" },
-    { "title": "Soft Skills", "issuer": "Camp Gen-Z", "category": "مهارات عامة", "imageUrl": "/certificates/Soft Skills.jpeg" }
+    {
+      "title": "Mobile Development By Flutter",
+      "issuer": "منصة Sprints",
+      "category": "تقني",
+      "imageUrl": "/certificates/Mobile_dev.jpg"
+    },
+    {
+      "title": "Cloud Essentials",
+      "issuer": "  NTI",
+      "category": "تقني",
+      "imageUrl": "/certificates/NTI_cloude.jpg"
+    },
+    {
+      "title": "مقدمة في البرمجة باستخدام Python",
+      "issuer": "منصة ITI",
+      "category": "تقني",
+      "imageUrl": "/certificates/python.jpg"
+    },
+    {
+      "title": "الذكاء الاصطناعي للجميع",
+      "issuer": "منصة ITI",
+      "category": "تقني",
+      "imageUrl": "/certificates/AI.png"
+    },
+    {
+      "title": "Computer Networks",
+      "issuer": "منصة ITI",
+      "category": "تقني",
+      "imageUrl": "/certificates/Network.jpg"
+    },
+    {
+      "title": "C++ Basics",
+      "issuer": "Camp Gen-Z",
+      "category": "تقني",
+      "imageUrl": "/certificates/c++.jpeg"
+    },
+    {
+      "title": "Python Basics",
+      "issuer": "Camp Gen-Z",
+      "category": "تقني",
+      "imageUrl": "/certificates/Python.jpeg"
+    },
+    {
+      "title": "Flutter Basics",
+      "issuer": "Camp Gen-Z",
+      "category": "تقني",
+      "imageUrl": "/certificates/Flutter.jpeg"
+    },
+    {
+      "title": "Marketing",
+      "issuer": "Camp Gen-Z",
+      "category": "مهارات عامة",
+      "imageUrl": "/certificates/Marketing.jpg"
+    },
+    {
+      "title": "Soft Skills",
+      "issuer": "Camp Gen-Z",
+      "category": "مهارات عامة",
+      "imageUrl": "/certificates/Soft Skills.jpeg"
+    }
   ]
 }

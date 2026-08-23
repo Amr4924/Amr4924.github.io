@@ -310,6 +310,9 @@ html[dir="rtl"] .marquee__track { animation-direction: reverse; }
 
 @media (max-width: 760px) { .bento-wrap { grid-template-columns: 1fr; } }
 
+/* ================= REAL SCREENSHOTS (per-project, user-supplied) ================= */
+.real-screenshot { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 /* ================= COVER ART (project placeholder imagery) ================= */
 .cover-art { width: 100%; height: 100%; display: grid; place-items: center; position: relative; }
 .cover-art img.cover-icon { width: 34%; height: 34%; object-fit: contain; opacity: 0.92; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35)); }
