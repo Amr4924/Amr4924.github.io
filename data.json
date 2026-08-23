@@ -147,7 +147,7 @@
       "status": "قيد التطوير",
       "coverIcon": "https://api.iconify.design/lucide/watch.svg?color=%23f3ece1",
       "coverTone": "rose",
-      "image": "",
+      "image": "/projects/aura-timepieces.png",
       "tech": [
         "Flutter",
         "Dart",

@@ -378,6 +378,7 @@ html[dir="rtl"] .marquee__track { animation-direction: reverse; }
 
 .case-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; margin: 30px 0 10px; }
 .case-gallery .frame-shot { border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 9/16; border: 1px solid var(--border); }
+.case-gallery .frame-shot--single { grid-column: 1 / -1; max-width: 300px; margin-inline: auto; }
 .case-gallery.is-web .frame-shot { aspect-ratio: 16/10; }
 
 .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; margin-top: 20px; }
