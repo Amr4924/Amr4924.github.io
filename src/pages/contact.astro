@@ -1,18 +1,57 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import data from '../../data.json';
+import siteData from '../../data.json';
+const emailLink = siteData.socialLinks.primary.find((l: any) => l.name === 'Email');
+const email = emailLink?.url.replace('mailto:', '');
+const github = siteData.socialLinks.primary.find((l: any) => l.name === 'GitHub');
+const linkedin = siteData.socialLinks.primary.find((l: any) => l.name === 'LinkedIn');
 ---
-<Layout title="SA3DWY | تواصل معي">
-    <section id="contact">
-        <h2 class="section-title fade-in-up">تواصل معي</h2>
-        <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">يمكنك متابعتي والتواصل معي عبر المنصات التالية</p>
-        <div class="social-links-grid">
-            {data.socialLinks.map((link, index) => (
-                <a href={link.url} target="_blank" class="social-card fade-in-up" style={`animation-delay: ${200 + index * 100}ms`}>
-                    <img src={link.icon} alt={link.name + " icon"} />
-                    <span>{link.name}</span>
-                </a>
-            ))}
+<Layout title="تواصل معي — SA3DWY">
+  <section class="page-head reveal">
+    <span class="section-eyebrow">Contact</span>
+    <h1 class="section-title">تواصل معايا</h1>
+    <p class="section-subtitle">لو عندك مشروع، فرصة تدريب، أو حتى سؤال بسيط — ابعتلي، وهرد بأسرع وقت.</p>
+  </section>
+
+  <div class="contact-grid reveal-group">
+    <div class="contact-card reveal">
+      <h3>ابعتلي رسالة</h3>
+      <form class="contact-form" id="contactForm">
+        <label>الاسم<input type="text" id="cf-name" required placeholder="اسمك" /></label>
+        <label>إيميلك<input type="email" id="cf-email" required placeholder="عشان أقدر أرد عليك" /></label>
+        <label>الرسالة<textarea id="cf-message" rows="5" required placeholder="اكتب رسالتك هنا..."></textarea></label>
+        <button type="submit" class="btn btn-primary">إرسال</button>
+        <p class="form-hint">هيفتح تطبيق الإيميل بتاعك برسالة جاهزة تقدر تراجعها وتبعتها.</p>
+      </form>
+    </div>
+
+    <div class="contact-card reveal">
+      <h3>تواصل مباشر</h3>
+      <div class="direct-contact">
+        <div class="social-primary">
+          <a class="social-row" href={`mailto:${email}`}><img src={emailLink?.icon} alt="" />{email}</a>
+          {linkedin && <a class="social-row" href={linkedin.url} target="_blank" rel="noopener noreferrer"><img src={linkedin.icon} alt="" />LinkedIn</a>}
+          {github && <a class="social-row" href={github.url} target="_blank" rel="noopener noreferrer"><img src={github.icon} alt="" />GitHub</a>}
         </div>
-    </section>
+        <p class="social-more-label">طرق تانية للتواصل</p>
+        <div class="social-more">
+          {siteData.socialLinks.more.map((link: any) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" title={link.name}><img src={link.icon} alt={link.name} /></a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ email }}>
+    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('cf-name').value;
+      const from = document.getElementById('cf-email').value;
+      const message = document.getElementById('cf-message').value;
+      const subject = encodeURIComponent(`رسالة من الموقع — ${name}`);
+      const body = encodeURIComponent(`${message}\n\n—\n${name}\n${from}`);
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    });
+  </script>
 </Layout>

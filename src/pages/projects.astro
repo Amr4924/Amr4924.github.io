@@ -1,133 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import siteData from '../../data.json';
 
-// --- GitHub API Configuration ---
-const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
-const USERNAME = 'Amr4924';
-const API_URL = `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=100`;
-
-// --- Fetch Projects from GitHub ---
-let projects = [];
-let fetchError = null;
-try {
-    if (!GITHUB_TOKEN) {
-        throw new Error("GITHUB_TOKEN is not configured in your .env file.");
-    }
-    const response = await fetch(API_URL, {
-        headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-            'User-Agent': 'Astro-Portfolio'
-        }
-    });
-    if (response.ok) {
-        const allProjects = await response.json();
-        if (Array.isArray(allProjects)) {
-            projects = allProjects; // Keep all projects initially, we will filter them safely before rendering
-        } else {
-            throw new Error("Received unexpected data format from GitHub. Check your token permissions or API status.");
-        }
-    } else {
-        const errorData = await response.json();
-        throw new Error(`Failed to fetch from GitHub: ${errorData.message}`);
-    }
-} catch (error) {
-    console.error("Build-time fetch failed:", error);
-    fetchError = error instanceof Error ? error.message : String(error);
-}
-
-// --- Language to Icon Mapping ---
-const languageIcons = {
-    "C++": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg",
-    "Python": "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg",
-    "JavaScript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
-    "Dart": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg",
-    "HTML": "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",
-    "CSS": "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
-    "Java": "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
-    "TypeScript": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
-    "Astro": "https://raw.githubusercontent.com/devicons/devicon/master/icons/astro/astro-original.svg",
-};
-const defaultIcon = "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg";
+const flutterCount = siteData.projects.filter(p => p.category === 'flutter').length;
+const webCount = siteData.projects.filter(p => p.category === 'web').length;
 ---
+<Layout title="المشاريع — SA3DWY">
+  <section class="page-head reveal">
+    <span class="section-eyebrow">Work</span>
+    <h1 class="section-title">المشاريع</h1>
+    <p class="section-subtitle">كل مشروع ليه صفحة تفاصيل خاصة بيه: المشكلة، الحل، والتقنيات المستخدمة.</p>
+  </section>
 
-<Layout title="SA3DWY | المشاريع">
-    <section id="projects">
-        <h2 class="section-title fade-in-up">مشاريعي على GitHub</h2>
-        <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">
-            هذه أحدث المشاريع التي أعمل عليها، يتم جلبها مباشرة من حسابي.
-        </p>
-        <div id="projects-grid" class="projects-grid">
-            {fetchError ? (
-                <div class="error-message">
-                    <h3>عفوًا، حدث خطأ</h3>
-                    <p>{fetchError}</p>
-                    <small>Please ensure your GITHUB_TOKEN is set correctly in the .env file.</small>
-                </div>
-            ) : projects.length > 0 ? (
-                projects
-                    /* --- FIX: Filter out any invalid project objects before trying to render them --- */
-                    .filter(project => project && project.id && !project.fork)
-                    .map((project, index) => (
-                        <div class="project-card fade-in-up" style={`animation-delay: ${200 + index * 100}ms`}>
-                            <div class="project-image-container project-icon-bg">
-                                <img
-                                    src={languageIcons[project.language as keyof typeof languageIcons] || defaultIcon}
-                                    alt={`أيقونة ${project.language || 'GitHub'}`}
-                                    class="project-icon"
-                                />
-                            </div>
-                            <div class="project-content">
-                                <div class="project-header">
-                                    <h2>{project.name}</h2>
-                                    {project.language && <span class="project-language">{project.language}</span>}
-                                </div>
-                                <p>{project.description || 'لا يوجد وصف لهذا المشروع.'}</p>
-                                <a href={project.html_url} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                    عرض على GitHub
-                                </a>
-                            </div>
-                        </div>
-                    ))
-            ) : (
-                <div class="error-message"><h3>لا توجد مشاريع لعرضها حاليًا.</h3></div>
-            )}
-        </div>
-    </section>
+  <div class="projects-toolbar reveal" role="tablist" aria-label="تصنيف المشاريع">
+    <button class="tab-btn is-active" data-filter="all">الكل ({siteData.projects.length})</button>
+    <button class="tab-btn" data-filter="flutter">Flutter Apps ({flutterCount})</button>
+    <button class="tab-btn" data-filter="web">Web Projects ({webCount})</button>
+  </div>
+
+  <div class="projects-grid reveal-group" id="projectsGrid">
+    {siteData.projects.map((project: any, i: number) => (
+      <div class="project-card-wrap" data-category={project.category}>
+        <ProjectCard project={project} index={i} />
+      </div>
+    ))}
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.project-card-wrap');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  </script>
 </Layout>
-
-<style>
-/* Styles remain the same */
-.project-icon-bg {
-    background-color: #162033;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.project-icon {
-    /* Set a fixed, centered size for the icon */
-    width: 96px;
-    height: 96px;
-    object-fit: contain;
-    /* Re-add the transition for the hover effect */
-    transition: transform 0.4s ease;
-}
-.project-card:hover .project-icon {
-    transform: scale(1.1);
-}
-.error-message {
-    background-color: var(--surface-color);
-    color: var(--text-muted-color);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    grid-column: 1 / -1;
-}
-.error-message small {
-    display: block;
-    margin-top: 15px;
-    color: var(--text-muted-color);
-    opacity: 0.7;
-}
-</style>

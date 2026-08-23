@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteData from '../../data.json';
+const { timeline, radar, story } = siteData.aboutMe;
+---
+<Layout title="رحلتي — SA3DWY">
+  <section class="page-head reveal">
+    <span class="section-eyebrow">My Journey</span>
+    <h1 class="section-title">رحلتي</h1>
+    <p class="about-lede">{story}</p>
+  </section>
+
+  <section class="timeline-section">
+    <div class="timeline reveal-group">
+      {timeline.map((item: any) => (
+        <div class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-year">{item.stage}</span>
+              <h3 class="timeline-title">{item.title}</h3>
+            </div>
+            <p class="timeline-desc">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="radar-section">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Honest Self-Check</span>
+      <h2 class="section-title">فين أنا دلوقتي</h2>
+      <p class="section-subtitle">تقييم صريح بدل الادعاء إني بعرف كل حاجة — ده بيتغير مع كل مشروع.</p>
+    </div>
+    <div class="radar-grid reveal-group">
+      <div class="radar-card confident reveal">
+        <h3>واثق فيها</h3>
+        <div class="tag-wrap">{radar.confident.map((s: string) => <span class="tag">{s}</span>)}</div>
+      </div>
+      <div class="radar-card learning reveal">
+        <h3>بتعلمها دلوقتي</h3>
+        <div class="tag-wrap">{radar.learning.map((s: string) => <span class="tag">{s}</span>)}</div>
+      </div>
+      <div class="radar-card exploring reveal">
+        <h3>بستكشفها</h3>
+        <div class="tag-wrap">{radar.exploring.map((s: string) => <span class="tag">{s}</span>)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-section reveal">
+    <div class="section-head">
+      <span class="section-eyebrow">Consistency</span>
+      <h2 class="section-title">نشاطي على GitHub</h2>
+    </div>
+    <div class="activity-card">
+      <img src="https://ghchart.rshah.org/c1495c/Amr4924" alt="مخطط نشاط GitHub الخاص بـ Amr4924" loading="lazy" />
+      <a href="https://github.com/Amr4924" target="_blank" rel="noopener noreferrer" class="activity-link">شوف البروفايل على GitHub ←</a>
+    </div>
+  </section>
+
+  <div class="about-cta reveal">
+    <a href="/projects" class="btn btn-primary">شوف مشاريعي</a>
+    <a href="/cv" class="btn btn-ghost">السيرة الذاتية</a>
+  </div>
+</Layout>

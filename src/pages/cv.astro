@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteData from '../../data.json';
+const email = siteData.socialLinks.primary.find((l: any) => l.name === 'Email')?.url.replace('mailto:', '');
+---
+<Layout title="السيرة الذاتية — SA3DWY">
+  <section class="page-head reveal">
+    <span class="section-eyebrow">CV</span>
+    <h1 class="section-title">السيرة الذاتية</h1>
+  </section>
+
+  <div class="cv-actions reveal">
+    <button onclick="window.print()" class="btn btn-primary">تحميل / طباعة PDF</button>
+    <a href="/contact" class="btn btn-ghost">تواصل معايا</a>
+  </div>
+
+  <div class="cv-sheet reveal">
+    <div class="cv-top">
+      <div>
+        <h2 class="cv-name">{siteData.name}</h2>
+        <p class="cv-title">{siteData.role}</p>
+      </div>
+      <div class="cv-links">
+        <a href="https://github.com/Amr4924" target="_blank" rel="noopener noreferrer">github.com/Amr4924</a>
+        <a href="https://www.linkedin.com/in/amrsa3dwy/" target="_blank" rel="noopener noreferrer">linkedin.com/in/amrsa3dwy</a>
+        <a href={`mailto:${email}`}>{email}</a>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h3>نبذة</h3>
+      <p>{siteData.aboutMe.lede}</p>
+    </div>
+
+    <div class="cv-block">
+      <h3>التعليم</h3>
+      <p>Computer Science & AI — South Valley National University (SVNU), أسوان · خريج متوقع يونيو 2028</p>
+    </div>
+
+    <div class="cv-block">
+      <h3>اللغات والـ Frameworks</h3>
+      <div class="tag-wrap">
+        {siteData.skills.languages.map((s: any) => <span class="tag">{s.name}</span>)}
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h3>الأدوات</h3>
+      <div class="tag-wrap">
+        {siteData.skills.tools.map((s: any) => <span class="tag">{s.name}</span>)}
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h3>المشاريع</h3>
+      <div class="cv-grid">
+        {siteData.projects.map((p: any) => (
+          <div>
+            <strong style="color:var(--text);">{p.name}</strong>
+            <p style="margin:4px 0 0; font-size:0.92rem;">{p.tagline}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h3>الشهادات</h3>
+      <div class="cv-grid">
+        {siteData.certificates.map((c: any) => (
+          <div><strong style="color:var(--text); font-size:0.95rem;">{c.title}</strong><p style="margin:4px 0 0; font-size:0.88rem;">{c.issuer}</p></div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

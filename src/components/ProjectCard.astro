@@ -1,0 +1,30 @@
+---
+import DeviceFrame from './DeviceFrame.astro';
+interface Props { project: any; index?: number; }
+const { project, index = 0 } = Astro.props;
+const variant = ((index % 3) + 1) as 1 | 2 | 3;
+const catLabel = project.category === 'flutter' ? 'Flutter App' : 'Web Project';
+---
+<article class="project-card reveal">
+  {project.category === 'flutter' ? (
+    <div class="project-card__media">
+      <DeviceFrame project={project} variant={variant} />
+    </div>
+  ) : (
+    <DeviceFrame project={project} variant={variant} />
+  )}
+  <div class="project-card__body">
+    <span class={`project-card__cat ${project.category}`}>{catLabel}</span>
+    <h3 class="project-card__title">{project.name}</h3>
+    <p class="project-card__desc">{project.description}</p>
+    <div class="project-card__tech tag-wrap">
+      {project.tech.slice(0, 3).map((t: string) => <span class="tag">{t}</span>)}
+    </div>
+    <div class="project-card__actions">
+      <a href={`/project/${project.slug}`} class="btn btn-soft btn-sm">تفاصيل المشروع</a>
+      {project.links?.demo && (
+        <a href={project.links.demo} target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">Live Demo</a>
+      )}
+    </div>
+  </div>
+</article>

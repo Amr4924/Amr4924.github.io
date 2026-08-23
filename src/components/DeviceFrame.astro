@@ -1,0 +1,25 @@
+---
+import AppScreenArt from './AppScreenArt.astro';
+import CoverArt from './CoverArt.astro';
+// Renders a project's preview: phone frame (Flutter) or browser frame (Web).
+interface Props { project: any; variant?: 1 | 2 | 3; size?: 'card' | 'large'; }
+const { project, variant = 1, size = 'card' } = Astro.props;
+const isFlutter = project.category === 'flutter';
+---
+{isFlutter ? (
+  <div class:list={["project-card__phone-wrap", size === 'large' && 'is-large']}>
+    <div class="device-frame--phone phone-float" style={`--tilt:0deg; ${size === 'large' ? 'width:220px;height:450px;border-radius:38px;padding:11px;' : ''}`}>
+      <div class="notch"></div>
+      <div class="screen"><AppScreenArt variant={variant} tone={project.coverTone} /></div>
+    </div>
+  </div>
+) : (
+  <div class="project-card__media is-web">
+    <div class="browser-frame">
+      <div class="browser-frame__bar"><span></span><span></span><span></span></div>
+      <div class="browser-frame__body">
+        <CoverArt icon={project.coverIcon} label={project.name} tone={project.coverTone} />
+      </div>
+    </div>
+  </div>
+)}

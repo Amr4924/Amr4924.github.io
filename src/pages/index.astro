@@ -1,75 +1,105 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import data from '../../data.json';
+import ProjectCard from '../components/ProjectCard.astro';
+import AppScreenArt from '../components/AppScreenArt.astro';
+import siteData from '../../data.json';
+
+const featuredSlugs = ['aura-timepieces', 'm-jewellery', 'ai-lecture-noter'];
+const featured = featuredSlugs
+  .map(slug => siteData.projects.find(p => p.slug === slug))
+  .filter(Boolean);
+
+const marqueeItems = [...siteData.skills.languages, ...siteData.skills.tools];
+const projectCount = siteData.projects.length;
 ---
-<Layout title="SA3DWY | الرئيسية">
-    <section id="about-me" class="about-section fade-in-up">
-        <img src={data.profilePicture} alt="My Picture" class="about-pic">
-        <div class="about-text">
-            <div class="static-text">Hello! I'm <span>Amr (SA3DWY)</span>,</div>
-            <div class="dynamic-text">
-                <span id="typing-span"></span>
-            </div>
-            <p lang="en" dir="ltr">
-                {data.aboutMe}
-            </p>
-        </div>
-    </section>
+<Layout title="SA3DWY — Flutter Developer">
 
-    <section id="skills">
-        <h2 class="section-title fade-in-up" style="animation-delay: 200ms;">المهارات والتقنيات</h2>
-        <p class="section-subtitle fade-in-up" style="animation-delay: 300ms;">
-            أبرز التقنيات والأدوات التي أستخدمها في تطوير المشاريع وحل المشكلات.
-        </p>
-        <div class="skills-grid">
-            {data.skills.map((skill, index) => (
-                <div class="skill-card fade-in-up" style={`animation-delay: ${400 + index * 100}ms`}>
-                    <img src={skill.icon} alt={skill.name + " icon"} />
-                    <span>{skill.name}</span>
-                </div>
-            ))}
+  <section class="hero">
+    <div class="hero-copy reveal">
+      <span class="hero-eyebrow"><span class="dot"></span>Flutter Developer</span>
+      <h1 class="hero-title">
+        بنيّ تطبيقات <span class="accent">Flutter</span><br />بحس تصميم واهتمام بالتفاصيل
+      </h1>
+      <p class="hero-lede">{siteData.aboutMe.lede}</p>
+      <div class="hero-cta">
+        <a href="/projects" class="btn btn-primary">شوف مشاريعي</a>
+        <a href="/contact" class="btn btn-ghost">تواصل معايا</a>
+      </div>
+      <div class="hero-meta">
+        <span>الفرقة الثانية</span>
+        <span>{projectCount} مشاريع</span>
+        <span>دفعة 2028</span>
+      </div>
+      <div class="hero-socials">
+        {siteData.socialLinks.primary.map(link => (
+          <a href={link.url} target={link.url.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" title={link.name}>
+            <img src={link.icon} alt={link.name} />
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="glow"></div>
+      <div class="device-frame--phone phone-float phone-secondary" style="--tilt:9deg">
+        <div class="notch"></div>
+        <div class="screen"><AppScreenArt variant={2} tone="gold" /></div>
+      </div>
+      <div class="device-frame--phone phone-float">
+        <div class="notch"></div>
+        <div class="screen"><AppScreenArt variant={1} tone="rose" /></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      {[...marqueeItems, ...marqueeItems].map(item => (
+        <div class="marquee__item"><img src={item.icon} alt="" />{item.name}</div>
+      ))}
+    </div>
+  </div>
+
+  <section class="featured-section">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Selected Work</span>
+      <h2 class="section-title">أبرز المشاريع</h2>
+      <p class="section-subtitle">تشكيلة من تطبيقات Flutter الحقيقية اللي بنيتها، وتجربة واحدة برا الموبايل بتدمج AI APIs.</p>
+    </div>
+    <div class="projects-grid reveal-group">
+      {featured.map((project: any, i: number) => <ProjectCard project={project} index={i} />)}
+    </div>
+    <div style="text-align:center; margin-top:38px;">
+      <a href="/projects" class="btn btn-soft">كل المشاريع</a>
+    </div>
+  </section>
+
+  <section class="skills-section" style="margin-top:90px;">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Stack</span>
+      <h2 class="section-title">المهارات والأدوات</h2>
+      <p class="section-subtitle">اللغات والـ Frameworks اللي بشتغل بيها، والأدوات اللي بستخدمها يوميًا في الشغل.</p>
+    </div>
+    <div class="bento-wrap reveal-group">
+      <div class="bento-panel">
+        <span class="bento-panel__label">Languages & Frameworks</span>
+        <h3 class="bento-panel__title">اللغات والـ Frameworks</h3>
+        <div class="bento-items">
+          {siteData.skills.languages.map(skill => (
+            <div class="skill-chip"><img src={skill.icon} alt="" /><span>{skill.name}</span></div>
+          ))}
         </div>
-    </section>
+      </div>
+      <div class="bento-panel">
+        <span class="bento-panel__label">Tools & Platforms</span>
+        <h3 class="bento-panel__title">الأدوات والمنصات</h3>
+        <div class="bento-items">
+          {siteData.skills.tools.map(skill => (
+            <div class="skill-chip"><img src={skill.icon} alt="" /><span>{skill.name}</span></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
 </Layout>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const typingSpan = document.getElementById('typing-span');
-        const roles = [
-            "CS & AI Student",
-            "A C++ Learner",
-            "An Open Source Enthusiast 👍"
-        ];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentRole = roles[roleIndex];
-            if (isDeleting) {
-                // Deleting text
-                typingSpan.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-                if (charIndex === 0) {
-                    isDeleting = false;
-                    roleIndex = (roleIndex + 1) % roles.length;
-                }
-            } else {
-                // Typing text
-                typingSpan.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-                if (charIndex === currentRole.length) {
-                    isDeleting = true;
-                    // Wait before deleting
-                    setTimeout(type, 1500);
-                    return;
-                }
-            }
-            // Adjust typing speed
-            const typingSpeed = isDeleting ? 50 : 150;
-            setTimeout(type, typingSpeed);
-        }
-
-        type();
-    });
-</script>

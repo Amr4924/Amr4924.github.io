@@ -1,29 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import data from '../../data.json';
+import siteData from '../../data.json';
 
-const { certificates } = data;
+const categories = [...new Set(siteData.certificates.map((c: any) => c.category))];
 ---
-
-<Layout title="SA3DWY | شهاداتي">
-  <section id="certificates">
-    <h2 class="section-title fade-in-up">الشهادات والتراخيص</h2>
-    <p class="section-subtitle fade-in-up" style="animation-delay: 100ms;">
-      مجموعة من الشهادات التي حصلت عليها في رحلتي التعليمية والعملية.
-    </p>
-    <div class="certificates-grid">
-      {certificates.map((cert, index) => (
-        <div class="certificate-card fade-in-up" style={`animation-delay: ${200 + index * 100}ms`}>
-          <a href={cert.imageUrl} target="_blank" class="certificate-image-link">
-            <img src={cert.imageUrl} alt={`صورة شهادة ${cert.title}`} class="certificate-image" />
-          </a>
-          <div class="certificate-content">
-            <h3>{cert.title}</h3>
-            <p><strong>صادرة من:</strong> {cert.issuer}</p>
-            {/* --- تم حذف السطر المسبب للمشكلة من هنا --- */}
-          </div>
-        </div>
-      ))}
-    </div>
+<Layout title="الشهادات — SA3DWY">
+  <section class="page-head reveal">
+    <span class="section-eyebrow">Certificates</span>
+    <h1 class="section-title">الشهادات</h1>
+    <p class="section-subtitle">شهادات من كورسات وبرامج تدريبية اشتركت فيها.</p>
   </section>
+
+  {categories.map((cat: any) => (
+    <div class="cert-group">
+      <h2 class="cert-group__title">{cat}</h2>
+      <div class="certificates-grid reveal-group">
+        {siteData.certificates.filter((c: any) => c.category === cat).map((cert: any) => (
+          <div class="certificate-card reveal">
+            <a href={cert.imageUrl} target="_blank" rel="noopener noreferrer" class="certificate-image-link">
+              <img src={cert.imageUrl} alt={cert.title} class="certificate-image" loading="lazy" />
+            </a>
+            <div class="certificate-content">
+              <h3>{cert.title}</h3>
+              <p>{cert.issuer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
 </Layout>

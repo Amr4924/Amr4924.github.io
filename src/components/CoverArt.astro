@@ -1,0 +1,12 @@
+---
+// Icon + label cover art used inside the browser-frame body for Web projects.
+interface Props { icon: string; label: string; tone?: 'rose' | 'gold'; }
+const { icon, label, tone = 'rose' } = Astro.props;
+const bg = tone === 'gold'
+  ? 'linear-gradient(135deg, var(--gold-dim), var(--surface))'
+  : 'linear-gradient(135deg, var(--rose-dim), var(--surface))';
+---
+<div class="cover-art" style={`background:${bg}`}>
+  <img class="cover-icon" src={icon} alt="" loading="lazy" />
+  <span class="cover-label">{label}</span>
+</div>
