@@ -7,13 +7,12 @@
 
   "aboutMe": {
     "lede": "طالب Computer Science & AI في جامعة South Valley الأهلية بأسوان. بدأت بـ C++ كأساس، وبعدها اتجهت بجدية لـ Flutter. بشتغل على تطبيقات حقيقية بحس تصميم واهتمام بالتفاصيل، وهدفي إني أوصل لمرحلة أدمج فيها الـ AI جوه التطبيقات اللي بعملها.",
-    "story": "بدأت رحلتي في البرمجة بلغة C++، اتعلمت من خلالها أساسيات التفكير المنطقي وحل المشكلات قبل ما اقرب لأي framework. بعد كده لقيت في Flutter الأداة اللي تخليني أطلع أفكاري كتطبيقات حقيقية حد تاني يقدر يستخدمها فعلاً — مش مجرد كود شغال بس، لكن تجربة مستخدم متعمولة صح. بنيت لحد دلوقتي أكتر من تطبيق تسوق (ساعات، مجوهرات)، تطبيق تعليم إلكتروني، وتطبيق لمتابعة المهام. وبالتوازي، عمري ما بطلت أجرب حاجات برا الموبايل — زي إضافة Chrome بتستخدم AI APIs (Whisper وGemini) عشان تلخص المحاضرات. الهدف الجاي إني أدمج الاتنين مع بعض: Flutter كواجهة، وAI كعقل بيخلي التطبيق يتفاعل مع المستخدم بذكاء.",
-    "timeline": [
+    "story":"بدأت رحلتي البرمجية مع C++، ومنها بنيت أساساً قوياً في التفكير المنطقي، وهياكل البيانات، وحل المشكلات قبل الانتقال إلى أي Framework.مع Flutter، تحولت المفاهيم إلى منتجات وتطبيقات متكاملة؛ الهدف منها ليس مجرد كود يعمل، بل تقديم تجربة مستخدم سلسة واحترافية. طبّقت ده عملياً في مشاريع متنوعة: تطبيقات تجارة إلكترونية متخصصة (ساعات ومجوهرات)، منصة تعليم إلكتروني، وتطبيقات لإدارة المهام والإنتاجية.شغفي الحالي هو دمج هذا الأساس مع تقنيات الذكاء الاصطناعي (AI)؛ لبناء تطبيقات ذكية تتفاعل مع المستخدم بكفاءة، وتجمع بين واجهة Flutter القوية والمعالجة الذكية في الخلفية.",
+      "timeline": [
       { "stage": "الأساس", "title": "C++ وأساسيات البرمجة", "desc": "بدأت بـ C++، وركزت على المنطق وحل المشكلات قبل أي framework." },
       { "stage": "أول تطبيق كبير", "title": "Tech School — منصة تعليم إلكتروني", "desc": "أكبر مشروع Flutter ليّا وقتها: شاشات كتير مبنية بـ setState وبيانات mock. ده اللي وريني احتياجي الحقيقي لـ state management." },
       { "stage": "إدارة الحالة", "title": "التعلم الجاد لـ Provider ثم BLoC", "desc": "بعد Tech School، اتجهت أتعلم Provider، وبعدها BLoC/Cubit، عشان أدير حالة التطبيق صح بدل setState." },
       { "stage": "مشاريع E-commerce", "title": "Aura Timepieces و M-Jewellery", "desc": "طبقت اللي اتعلمته في تطبيقين تسوق حقيقيين — واحد لساعات وواحد لمجوهرات بدعم لغتين، مع إعادة هيكلة كود قائم بمعمارية feature-first." },
-      { "stage": "برا الموبايل", "title": "AI Lecture Noter", "desc": "بنيت إضافة Chrome بتستخدم Whisper وGemini APIs — أول تجربة حقيقية ليّا في دمج الـ AI جوه أداة بستخدمها فعلاً." },
       { "stage": "الهدف الجاي", "title": "دمج AI جوه تطبيقات Flutter", "desc": "الخطوة الجاية إني أوصل اللي اتعلمته في الـ AI APIs بمشاريع Flutter نفسها، مش تطبيقين منفصلين." }
     ],
     "radar": {
@@ -42,13 +41,13 @@
   "socialLinks": {
     "primary": [
       { "name": "GitHub", "url": "https://github.com/Amr4924", "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23f3ece1" },
-      { "name": "LinkedIn", "url": "https://www.linkedin.com/in/amrsa3dwy/", "icon": "https://api.iconify.design/simple-icons/linkedin.svg?color=%23f3ece1" },
-      { "name": "Email", "url": "mailto:your.email@example.com", "icon": "https://api.iconify.design/lucide/mail.svg?color=%23f3ece1" }
+      { "name": "LinkedIn", "url": "https://www.linkedin.com/in/sa3dwy", "icon": "https://api.iconify.design/simple-icons/linkedin.svg?color=%23f3ece1" },
+      { "name": "Email", "url": "mailto:amrsaad0016a@gmail.com", "icon": "https://api.iconify.design/lucide/mail.svg?color=%23f3ece1" }
     ],
     "more": [
       { "name": "Linktree", "url": "https://linktr.ee/sa3dwy", "icon": "https://api.iconify.design/simple-icons/linktree.svg?color=%23f3ece1" },
-      { "name": "Facebook", "url": "https://www.facebook.com/profile.php?id=100079413693293", "icon": "https://api.iconify.design/simple-icons/facebook.svg?color=%23f3ece1" },
-      { "name": "Instagram", "url": "https://www.instagram.com/3mr_sa3d7/", "icon": "https://api.iconify.design/simple-icons/instagram.svg?color=%23f3ece1" },
+      { "name": "Facebook", "url": "https://www.facebook.com/S3adwy", "icon": "https://api.iconify.design/simple-icons/facebook.svg?color=%23f3ece1" },
+      { "name": "Instagram", "url": "https://www.instagram.com/sa3dwy.dev/", "icon": "https://api.iconify.design/simple-icons/instagram.svg?color=%23f3ece1" },
       { "name": "TikTok", "url": "https://www.tiktok.com/@3mr675", "icon": "https://api.iconify.design/simple-icons/tiktok.svg?color=%23f3ece1" }
     ]
   },
@@ -143,46 +142,12 @@
         "features": ["إضافة وتتبع المهام اليومية", "واجهة بسيطة ومباشرة"],
         "result": "أول مشروع كمّلته بميزات إضافية بعد الإصدار الأول بدل ما أسيبه عند أول نسخة شغالة."
       }
-    },
-    {
-      "slug": "ai-lecture-noter",
-      "name": "AI Lecture Noter",
-      "category": "web",
-      "tagline": "إضافة Chrome بتسجل المحاضرة وتلخصها بالـ AI",
-      "description": "إضافة Chrome (Manifest V3) بتسجل صوت التاب، تحوله لنص بـ OpenAI Whisper، وتلخصه في نوتة منظمة بـ Gemini.",
-      "status": "مشروع تجريبي",
-      "coverIcon": "https://api.iconify.design/lucide/mic.svg?color=%23f3ece1",
-      "coverTone": "gold",
-      "tech": ["JavaScript", "Node.js", "Express", "Whisper API", "Gemini API"],
-      "links": { "demo": "" },
-      "caseStudy": {
-        "problem": "عايز حل يسجل صوت أي محاضرة من التاب نفسه من غير ما احتاج تطبيق خارجي، ويطلعلي ملخص منظم مش تسجيل خام بس.",
-        "approach": "بنيت الإضافة بـ Manifest V3 باستخدام side panel وoffscreen document للتسجيل، وبعتت الصوت لباك إند محلي بـ Node.js/Express بيستخدم OpenAI Whisper للتفريغ النصي وGemini لتلخيصه في نوتة منظمة.",
-        "features": ["تسجيل صوت التاب مباشرة", "تفريغ نصي بـ Whisper", "تلخيص منظم بـ Gemini", "باك إند Node/Express محلي"],
-        "result": "أول مشروع ليّا بيدمج AI APIs حقيقي جوه أداة بستخدمها فعلاً — ده اللي بني عليه هدفي إني أدمج نفس الفكرة جوه تطبيقات Flutter."
-      }
-    },
-    {
-      "slug": "sa3dwy-portfolio",
-      "name": "SA3DWY Portfolio",
-      "category": "web",
-      "tagline": "الموقع اللي بتتصفحه دلوقتي",
-      "description": "بورتفوليو شخصي مبني بـ Astro، بنظام تصميم مخصص وهيكلة مشاريع حسب النوع.",
-      "status": "قيد التطوير المستمر",
-      "coverIcon": "https://api.iconify.design/lucide/layout-template.svg?color=%23f3ece1",
-      "coverTone": "rose",
-      "tech": ["Astro", "HTML", "CSS", "JavaScript"],
-      "links": { "demo": "https://amr4924.github.io" },
-      "caseStudy": {
-        "problem": "عايز مكان واحد يجمع كل مشاريعي بشكل منظم، يعرض مين أنا فعلاً كمطور Flutter، ومش شكله عام زي أي بورتفوليو AI-generated.",
-        "approach": "بنيت الموقع بـ Astro كـ Static Site، بنظام تصميم مخصص (ألوان وخطوط مش الديفولت)، وهيكلة مشاريع حسب النوع Flutter/Web، وصفحة تفاصيل منفصلة لكل مشروع.",
-        "features": ["نظام تصميم مخصص من الصفر", "تصنيف مشاريع Flutter مقابل Web", "صفحة Case Study مستقلة لكل مشروع"],
-        "result": "بيتطور باستمرار كل ما أضيف مشروع جديد أو أتعلم حاجة تستاهل تتحط هنا."
-      }
     }
   ],
 
   "certificates": [
+    { "title": "Mobile Development By Flutter", "issuer": "منصة Sprints", "category": "تقني", "imageUrl": "/certificates/Mobile_dev.jpg" },
+    { "title": "Cloud Essentials", "issuer": "  NTI", "category": "تقني", "imageUrl": "/certificates/NTI_cloude.jpg" },
     { "title": "مقدمة في البرمجة باستخدام Python", "issuer": "منصة ITI", "category": "تقني", "imageUrl": "/certificates/python.jpg" },
     { "title": "الذكاء الاصطناعي للجميع", "issuer": "منصة ITI", "category": "تقني", "imageUrl": "/certificates/AI.png" },
     { "title": "Computer Networks", "issuer": "منصة ITI", "category": "تقني", "imageUrl": "/certificates/Network.jpg" },

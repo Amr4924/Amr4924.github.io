@@ -3,7 +3,7 @@ import DeviceFrame from './DeviceFrame.astro';
 interface Props { project: any; index?: number; }
 const { project, index = 0 } = Astro.props;
 const variant = ((index % 3) + 1) as 1 | 2 | 3;
-const catLabel = project.category === 'flutter' ? 'Flutter App' : 'Web Project';
+const catLabel = project.category === 'flutter' ? 'Flutter App' : 'Flutter App';
 ---
 <article class="project-card reveal">
   {project.category === 'flutter' ? (
