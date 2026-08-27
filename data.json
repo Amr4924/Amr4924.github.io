@@ -291,6 +291,12 @@
       "imageUrl": "/certificates/Mobile_dev.jpg"
     },
     {
+      "title": "HCCDA-Tech Essentials",
+      "issuer": "HUAWEI",
+      "category": "تقني",
+      "imageUrl": "/certificates/HCCDA.jpeg"
+    },
+    {
       "title": "Cloud Essentials",
       "issuer": "  NTI",
       "category": "تقني",
