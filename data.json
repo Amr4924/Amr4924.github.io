@@ -1,6 +1,6 @@
 {
   "name": "Amr Saad",
-  "handle": "SA3DWY",
+  "handle": "SA3DWYssss",
   "role": "Flutter Developer | CS & AI Student",
   "profilePicture": "/my_photo.jpg",
   "heroPicture": "/my_photo.jpg",
@@ -166,7 +166,8 @@
           "صفحة Favorites مربوطة بحالة تسجيل الدخول"
         ],
         "result": "أكبر تحدي كان إعادة هيكلة مشروع شغال بالفعل من غير ما أكسر حاجة — قسمتها feature بعد التانية بدل ما أعيد كتابة كل حاجة مرة واحدة."
-      }
+      },
+      "featured": true
     },
     {
       "slug": "m-jewellery",
@@ -196,7 +197,8 @@
           "Mock authentication"
         ],
         "result": "لقيت وأصلحت bug حقيقي في فورم إنشاء الحساب — حقل الموبايل كان متوصل غلط بـ controller الباسورد بدل الـ controller بتاعه. حاليًا بركّز على إدارة الحالة، والخطوة الجاية هي ربط المشروع بـ backend حقيقي."
-      }
+      },
+      "featured": true
     },
     {
       "slug": "tech-school",
@@ -226,7 +228,8 @@
           "بروفايل المستخدم"
         ],
         "result": "المشروع ده تحديدًا هو اللي وريني ليه محتاج state management حقيقي، وخلاني أتوجه بعده أتعلم Provider وBLoC بدل ما فضل معتمد على setState في مشاريع أكبر."
-      }
+      },
+      "featured": true
     },
     {
       "slug": "sprint-store",
@@ -298,7 +301,7 @@
     },
     {
       "title": "Cloud Essentials",
-      "issuer": "  NTI",
+      "issuer": "NTI",
       "category": "تقني",
       "imageUrl": "/certificates/NTI_cloude.jpg"
     },
@@ -350,5 +353,19 @@
       "category": "مهارات عامة",
       "imageUrl": "/certificates/Soft Skills.jpeg"
     }
-  ]
+  ],
+  "hero": {
+    "eyebrow": "Flutter Developer",
+    "titleBefore": "أبني تطبيقات",
+    "titleAccent": "Flutter",
+    "titleAfter": "بحس تصميم واهتمام بالتفاصيل",
+    "chips": [
+      "الفرقة الثالثة",
+      "{projects} مشاريع",
+      "دفعة 2028"
+    ]
+  },
+  "cv": {
+    "education": "Computer Science & AI — South Valley National University (SVNU), خريج متوقع يونيو 2028"
+  }
 }
