@@ -93,6 +93,10 @@
       {
         "name": "GitHub",
         "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23f3ece1"
+      },
+      {
+        "name": "PostMan",
+        "icon": "https://api.iconify.design/simple-icons/postman.svg?color=%23f3ece1"
       }
     ]
   },
