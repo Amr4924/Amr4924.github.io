@@ -2,7 +2,7 @@
 import '../styles/style.css';
 import siteData from '../../data.json';
 
-const { title = "SA3DWY — Flutter Developer", description = "بورتفوليو عمرو سعدوي — مطوّر Flutter وطالب Computer Science & AI" } = Astro.props;
+const { title = `${siteData.handle} — Flutter Developer`, description = `${siteData.name} — ${siteData.role}` } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 
 const navItems = [

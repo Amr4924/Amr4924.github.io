@@ -2,8 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import siteData from '../../data.json';
 const { timeline, radar, story } = siteData.aboutMe;
+const ghUrl: string = siteData.socialLinks.primary.find((l: any) => l.name === 'GitHub')?.url ?? 'https://github.com/Amr4924';
+const ghUser = ghUrl.replace(/\/+$/, '').split('/').pop();
 ---
-<Layout title="رحلتي — SA3DWY">
+<Layout title={`رحلتي — ${siteData.handle}`}>
   <section class="page-head reveal">
     <span class="section-eyebrow">My Journey</span>
     <h1 class="section-title">رحلتي</h1>
@@ -55,8 +57,8 @@ const { timeline, radar, story } = siteData.aboutMe;
       <h2 class="section-title">نشاطي على GitHub</h2>
     </div>
     <div class="activity-card">
-      <img src="https://ghchart.rshah.org/c1495c/Amr4924" alt="مخطط نشاط GitHub الخاص بـ Amr4924" loading="lazy" />
-      <a href="https://github.com/Amr4924" target="_blank" rel="noopener noreferrer" class="activity-link">شوف البروفايل على GitHub ←</a>
+      <img src={`https://ghchart.rshah.org/c1495c/${ghUser}`} alt={`مخطط نشاط GitHub الخاص بـ ${ghUser}`} loading="lazy" />
+      <a href={ghUrl} target="_blank" rel="noopener noreferrer" class="activity-link">شوف البروفايل على GitHub ←</a>
     </div>
   </section>
 

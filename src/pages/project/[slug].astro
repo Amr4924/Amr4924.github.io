@@ -15,7 +15,7 @@ const { project } = Astro.props as { project: any };
 const catLabel = project.category === 'flutter' ? 'Flutter App' : 'Web Project';
 const cs = project.caseStudy;
 ---
-<Layout title={`${project.name} — SA3DWY`}>
+<Layout title={`${project.name} — ${siteData.handle}`}>
   <a href="/projects" class="btn btn-ghost btn-sm reveal" style="margin-bottom:10px;">→ رجوع للمشاريع</a>
 
   <section class="case-hero reveal">

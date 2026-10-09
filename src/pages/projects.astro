@@ -3,10 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import siteData from '../../data.json';
 
-const flutterCount = siteData.projects.filter(p => p.category === 'flutter').length;
-const webCount = siteData.projects.filter(p => p.category === 'web').length;
+const categories = [
+  { key: 'flutter', label: 'Flutter Apps' },
+  { key: 'web', label: 'Web Projects' },
+]
+  .map((c) => ({ ...c, count: siteData.projects.filter((p: any) => p.category === c.key).length }))
+  .filter((c) => c.count > 0);
 ---
-<Layout title="المشاريع — SA3DWY">
+<Layout title={`المشاريع — ${siteData.handle}`}>
   <section class="page-head reveal">
     <span class="section-eyebrow">Work</span>
     <h1 class="section-title">المشاريع</h1>
@@ -15,8 +19,9 @@ const webCount = siteData.projects.filter(p => p.category === 'web').length;
 
   <div class="projects-toolbar reveal" role="tablist" aria-label="تصنيف المشاريع">
     <button class="tab-btn is-active" data-filter="all">الكل ({siteData.projects.length})</button>
-    <button class="tab-btn" data-filter="flutter">Flutter Apps ({flutterCount})</button>
-    <!-- <button class="tab-btn" data-filter="web">Web Projects ({webCount})</button> -->
+    {categories.map((c) => (
+      <button class="tab-btn" data-filter={c.key}>{c.label} ({c.count})</button>
+    ))}
   </div>
 
   <div class="projects-grid reveal-group" id="projectsGrid">

@@ -6,7 +6,7 @@ const email = emailLink?.url.replace('mailto:', '');
 const github = siteData.socialLinks.primary.find((l: any) => l.name === 'GitHub');
 const linkedin = siteData.socialLinks.primary.find((l: any) => l.name === 'LinkedIn');
 ---
-<Layout title="تواصل معي — SA3DWY">
+<Layout title={`تواصل معي — ${siteData.handle}`}>
   <section class="page-head reveal">
     <span class="section-eyebrow">Contact</span>
     <h1 class="section-title">تواصل معايا</h1>

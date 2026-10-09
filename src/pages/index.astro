@@ -4,24 +4,28 @@ import ProjectCard from "../components/ProjectCard.astro";
 import AppScreenArt from "../components/AppScreenArt.astro";
 import siteData from "../../data.json";
 
-const featuredSlugs = ["aura-timepieces", "m-jewellery", "tech-school"];
-const featured = featuredSlugs
-  .map((slug) => siteData.projects.find((p) => p.slug === slug))
-  .filter(Boolean);
+const hero: any = (siteData as any).hero ?? {};
+const projectCount = siteData.projects.length;
+
+// Projects flagged "featured" in the dashboard; falls back to the first three.
+const flagged = siteData.projects.filter((p: any) => p.featured);
+const featured: any[] = flagged.length ? flagged : siteData.projects.slice(0, 3);
+
+const heroChips: string[] = (hero.chips ?? ["الفرقة الثالثة", "{projects} مشاريع", "دفعة 2028"]).map(
+  (c: string) => c.replace("{projects}", String(projectCount))
+);
 
 const marqueeItems = [...siteData.skills.languages, ...siteData.skills.tools];
-const projectCount = siteData.projects.length;
 ---
 
-<Layout title="SA3DWY — Flutter Developer">
+<Layout title={`${siteData.handle} — ${hero.eyebrow ?? "Flutter Developer"}`}>
   <section class="hero">
     <div class="hero-copy reveal">
       <span class="hero-eyebrow"
-        ><span class="dot"></span>Flutter Developer</span
+        ><span class="dot"></span>{hero.eyebrow ?? "Flutter Developer"}</span
       >
       <h1 class="hero-title">
-        أبني تطبيقات <span class="accent">Flutter</span><br />بحس تصميم واهتمام
-        بالتفاصيل
+        {hero.titleBefore ?? "أبني تطبيقات"} <span class="accent">{hero.titleAccent ?? "Flutter"}</span><br />{hero.titleAfter ?? "بحس تصميم واهتمام بالتفاصيل"}
       </h1>
       <p class="hero-lede">{siteData.aboutMe.lede}</p>
       <div class="hero-cta">
@@ -29,9 +33,7 @@ const projectCount = siteData.projects.length;
         <a href="/contact" class="btn btn-ghost">تواصل معايا</a>
       </div>
       <div class="hero-meta">
-        <span>الفرقة الثانية</span>
-        <span>{projectCount} مشاريع</span>
-        <span>دفعة 2028</span>
+        {heroChips.map((chip) => <span>{chip}</span>)}
       </div>
       <div class="hero-socials">
         {
@@ -68,10 +70,14 @@ const projectCount = siteData.projects.length;
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
       {
-        [...marqueeItems, ...marqueeItems].map((item) => (
-          <div class="marquee__item">
-            <img src={item.icon} alt="" />
-            {item.name}
+        [0, 1, 2, 3].map(() => (
+          <div class="marquee__group">
+            {marqueeItems.map((item) => (
+              <div class="marquee__item">
+                <img src={item.icon} alt="" />
+                {item.name}
+              </div>
+            ))}
           </div>
         ))
       }

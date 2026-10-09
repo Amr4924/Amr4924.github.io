@@ -1,0 +1,30 @@
+---
+import '../styles/style.css';
+import '../styles/admin.css';
+// A fresh query string on every build so the browser never serves a stale dashboard script.
+const v = Date.now();
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>لوحة التحكم</title>
+  </head>
+  <body class="adm">
+    <div id="app"></div>
+    <noscript><p style="padding:24px">لوحة التحكم محتاجة JavaScript.</p></noscript>
+    <script is:inline>
+      window.ADMIN_CONFIG = {
+        owner: 'Amr4924',
+        repo: 'Amr4924.github.io',
+        branch: '',            // فاضي = الـ default branch بتاع الريبو (main)
+        dataPath: 'data.json',
+        pollMs: 5000
+      };
+    </script>
+    <script is:inline src={`/admin/app.js?v=${v}`}></script>
+  </body>
+</html>

@@ -1,9 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteData from '../../data.json';
-const email = siteData.socialLinks.primary.find((l: any) => l.name === 'Email')?.url.replace('mailto:', '');
+const social: any[] = siteData.socialLinks.primary;
+const findLink = (n: string) => social.find((l) => l.name === n);
+const github = findLink('GitHub');
+const linkedin = findLink('LinkedIn');
+const email = findLink('Email')?.url.replace('mailto:', '');
+const pretty = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/+$/, '');
+const education: string = (siteData as any).cv?.education ?? 'Computer Science & AI — South Valley National University (SVNU), خريج متوقع يونيو 2028';
 ---
-<Layout title="السيرة الذاتية — SA3DWY">
+<Layout title={`السيرة الذاتية — ${siteData.handle}`}>
   <section class="page-head reveal">
     <span class="section-eyebrow">CV</span>
     <h1 class="section-title">السيرة الذاتية</h1>
@@ -21,9 +27,9 @@ const email = siteData.socialLinks.primary.find((l: any) => l.name === 'Email')?
         <p class="cv-title">{siteData.role}</p>
       </div>
       <div class="cv-links">
-        <a href="https://github.com/Amr4924" target="_blank" rel="noopener noreferrer">github.com/Amr4924</a>
-        <a href="https://www.linkedin.com/in/amrsa3dwy/" target="_blank" rel="noopener noreferrer">linkedin.com/in/amrsa3dwy</a>
-        <a href={`mailto:${email}`}>{email}</a>
+        {github && <a href={github.url} target="_blank" rel="noopener noreferrer">{pretty(github.url)}</a>}
+        {linkedin && <a href={linkedin.url} target="_blank" rel="noopener noreferrer">{pretty(linkedin.url)}</a>}
+        {email && <a href={`mailto:${email}`}>{email}</a>}
       </div>
     </div>
 
@@ -34,7 +40,7 @@ const email = siteData.socialLinks.primary.find((l: any) => l.name === 'Email')?
 
     <div class="cv-block">
       <h3>التعليم</h3>
-      <p>Computer Science & AI — South Valley National University (SVNU),خريج متوقع يونيو 2028</p>
+      <p>{education}</p>
     </div>
 
     <div class="cv-block">

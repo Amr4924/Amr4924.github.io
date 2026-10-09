@@ -4,7 +4,7 @@ import siteData from '../../data.json';
 
 const categories = [...new Set(siteData.certificates.map((c: any) => c.category))];
 ---
-<Layout title="الشهادات — SA3DWY">
+<Layout title={`الشهادات — ${siteData.handle}`}>
   <section class="page-head reveal">
     <span class="section-eyebrow">Certificates</span>
     <h1 class="section-title">الشهادات</h1>

@@ -283,11 +283,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* ================= TECH MARQUEE ================= */
 .marquee { overflow: hidden; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); padding: 26px 0; margin: 10px 0 70px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.marquee__track { display: flex; gap: 56px; width: max-content; animation: marqueeScroll 28s linear infinite; }
+.marquee__track { display: flex; width: max-content; animation: marqueeScroll 32s linear infinite; }
+/* Each group carries its own trailing gap, so moving the track by exactly half its width
+   (= two groups) lands on an identical picture: the loop is seamless and never goes blank. */
+.marquee__group { display: flex; gap: 56px; padding-inline-end: 56px; flex-shrink: 0; }
 .marquee__item { display: flex; align-items: center; gap: 10px; color: var(--text-dim); font-family: var(--font-mono); font-size: 0.95rem; white-space: nowrap; }
 .marquee__item img { width: 22px; height: 22px; opacity: 0.75; }
-@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-html[dir="rtl"] .marquee__track { animation-direction: reverse; }
+/* The page is RTL: the track hugs the right edge and overflows to the left, so it has to travel
+   to the RIGHT (positive X) to keep new items entering from the left. */
+@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(50%); } }
+@keyframes marqueeScrollLtr { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+html:not([dir="rtl"]) .marquee__track { animation-name: marqueeScrollLtr; }
 
 /* ================= BENTO SKILLS/TOOLS ================= */
 .bento-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
