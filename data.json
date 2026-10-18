@@ -303,7 +303,7 @@
         ],
         "result": "المشروع ده تحديدًا هو اللي وريني ليه محتاج state management حقيقي، وخلاني أتوجه بعده أتعلم Provider وBLoC بدل ما فضل معتمد على setState في مشاريع أكبر."
       },
-      "featured": true
+      "featured": false
     },
     {
       "slug": "forge",
