@@ -263,6 +263,49 @@
       "featured": true
     },
     {
+      "slug": "quick-bite",
+      "name": "Quick Bite",
+      "category": "flutter",
+      "tagline": "واجهة تطبيق طعام عصرية مبنية بـ Flutter لإدارة تصفح المنتجات والسلة",
+      "description": "Quick Bite هو تطبيق Mobile UI لتصفح الوجبات، عرض تفاصيل المنتجات، وإضافة الطلبات إلى السلة مع إدارة الكميات وحساب الإجمالي.",
+      "status": "قيد التطوير",
+      "coverIcon": "https://api.iconify.design/lucide/smartphone.svg?color=%23f3ece1",
+      "coverTone": "gold",
+      "image": "/projects/new-project-7-mve9qqay4.webp",
+      "images": [
+        "/projects/new-project-7-mve9qqay4.webp",
+        "/projects/new-project-7-mve9qi9e0.png",
+        "/projects/new-project-7-mve9qk3j1.png",
+        "/projects/new-project-7-mve9qm5l2.png",
+        "/projects/new-project-7-mve9qo5e3.png",
+        "/projects/new-project-7-mve9qxwi5.webp",
+        "/projects/new-project-7-mve9r07d6.webp",
+        "/projects/new-project-7-mve9r2a87.webp"
+      ],
+      "tech": [
+        "Flutter",
+        "Dart",
+        "flutter_bloc",
+        "Cubit",
+        "flutter_screenutil",
+        "flutter_svg",
+        "Google Fonts",
+        "Material Design"
+      ],
+      "featured": true,
+      "links": {
+        "demo": ""
+      },
+      "caseStudy": {
+        "problem": "كان التحدي هو تحويل تصميم Mobile UI إلى تطبيق Flutter منظم مع الحفاظ على المسافات، الألوان، التناسق، وتجربة استخدام واضحة لتطبيق طلب الطعام.",
+        "approach": "تم تقسيم المشروع إلى Features وCore، وإنشاء شاشات مستقلة للـ Onboarding والمصادقة والمنتجات والتفاصيل والسلة، مع استخدام Cubit لإدارة حالة المصادقة والسلة والمنتجات.",
+        "features": [
+          "Onboarding، تسجيل الدخول وإنشاء الحساب كواجهات، عرض المنتجات، التصنيفات بصريًا، تفاصيل المنتج، Favorite، إضافة للسلة، التحكم في الكمية، حذف المنتجات، حساب Subtotal وDelivery Fee وTotal."
+        ],
+        "result": "ساعد المشروع على تطوير مهارات تنفيذ تصميمات Figma باستخدام Flutter، فهم المسافات والتفاصيل البصرية، تنظيم بنية المشروع، واستخدام Bloc/Cubit لإدارة الحالة. كما ساعد على تحديد نقاط القوة والجوانب التي تحتاج إلى تطوير."
+      }
+    },
+    {
       "slug": "forge",
       "name": "Forge",
       "category": "flutter",
@@ -289,7 +332,7 @@
         "Smooth Page Indicator",
         "Font Awesome Icons"
       ],
-      "featured": true,
+      "featured": false,
       "links": {
         "demo": ""
       },
@@ -374,49 +417,6 @@
           "مراجعة شاملة وتحسين بعد أول نسخة"
         ],
         "result": "لسه في خطتي أحسّن الـ transitions وأصلح الـ localization في نسخة جاية."
-      }
-    },
-    {
-      "slug": "quick-bite",
-      "name": "Quick Bite",
-      "category": "flutter",
-      "tagline": "واجهة تطبيق طعام عصرية مبنية بـ Flutter لإدارة تصفح المنتجات والسلة",
-      "description": "Quick Bite هو تطبيق Mobile UI لتصفح الوجبات، عرض تفاصيل المنتجات، وإضافة الطلبات إلى السلة مع إدارة الكميات وحساب الإجمالي.",
-      "status": "قيد التطوير",
-      "coverIcon": "https://api.iconify.design/lucide/smartphone.svg?color=%23f3ece1",
-      "coverTone": "gold",
-      "image": "/projects/new-project-7-mve9qqay4.webp",
-      "images": [
-        "/projects/new-project-7-mve9qqay4.webp",
-        "/projects/new-project-7-mve9qi9e0.png",
-        "/projects/new-project-7-mve9qk3j1.png",
-        "/projects/new-project-7-mve9qm5l2.png",
-        "/projects/new-project-7-mve9qo5e3.png",
-        "/projects/new-project-7-mve9qxwi5.webp",
-        "/projects/new-project-7-mve9r07d6.webp",
-        "/projects/new-project-7-mve9r2a87.webp"
-      ],
-      "tech": [
-        "Flutter",
-        "Dart",
-        "flutter_bloc",
-        "Cubit",
-        "flutter_screenutil",
-        "flutter_svg",
-        "Google Fonts",
-        "Material Design"
-      ],
-      "featured": true,
-      "links": {
-        "demo": ""
-      },
-      "caseStudy": {
-        "problem": "كان التحدي هو تحويل تصميم Mobile UI إلى تطبيق Flutter منظم مع الحفاظ على المسافات، الألوان، التناسق، وتجربة استخدام واضحة لتطبيق طلب الطعام.",
-        "approach": "تم تقسيم المشروع إلى Features وCore، وإنشاء شاشات مستقلة للـ Onboarding والمصادقة والمنتجات والتفاصيل والسلة، مع استخدام Cubit لإدارة حالة المصادقة والسلة والمنتجات.",
-        "features": [
-          "Onboarding، تسجيل الدخول وإنشاء الحساب كواجهات، عرض المنتجات، التصنيفات بصريًا، تفاصيل المنتج، Favorite، إضافة للسلة، التحكم في الكمية، حذف المنتجات، حساب Subtotal وDelivery Fee وTotal."
-        ],
-        "result": "ساعد المشروع على تطوير مهارات تنفيذ تصميمات Figma باستخدام Flutter، فهم المسافات والتفاصيل البصرية، تنظيم بنية المشروع، واستخدام Bloc/Cubit لإدارة الحالة. كما ساعد على تحديد نقاط القوة والجوانب التي تحتاج إلى تطوير."
       }
     }
   ],
