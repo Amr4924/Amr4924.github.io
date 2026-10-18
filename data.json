@@ -263,34 +263,6 @@
       "featured": true
     },
     {
-      "slug": "sprint-store",
-      "name": "Sprint Store",
-      "category": "flutter",
-      "tagline": "مشروع تخرج من كورس Sprints — تطبيق تسوق",
-      "description": "تطبيق تسوق بنيته كمشروع نهائي لكورس Sprints، وراجعته وحسّنته بعد المراجعة الأولى.",
-      "status": "مشروع تدريبي مكتمل",
-      "coverIcon": "https://api.iconify.design/lucide/shopping-bag.svg?color=%23f3ece1",
-      "coverTone": "gold",
-      "image": "",
-      "images": [],
-      "tech": [
-        "Flutter",
-        "Dart"
-      ],
-      "links": {
-        "demo": ""
-      },
-      "caseStudy": {
-        "problem": "المشروع كان تطبيق تخرّج من كورس Sprints، والهدف إني أطبّق اللي اتعلمته في مشروع متكامل من الصفر مش تمارين منفصلة.",
-        "approach": "بعد أول نسخة، راجعت الكود بالكامل وصلحت مشاكل في الـ navigation واتجاه الـ scroll وبنية الـ widgets، وضفت screenshots حقيقية للمشروع بدل الـ placeholders.",
-        "features": [
-          "تدفق تسوق كامل: تصفح، سلة، شراء",
-          "مراجعة شاملة وتحسين بعد أول نسخة"
-        ],
-        "result": "لسه في خطتي أحسّن الـ transitions وأصلح الـ localization في نسخة جاية."
-      }
-    },
-    {
       "slug": "habitsandtasks",
       "name": "HabitsAndTasks",
       "category": "flutter",
@@ -326,6 +298,82 @@
           "واجهة بسيطة ومباشرة"
         ],
         "result": "أول مشروع كمّلته بميزات إضافية بعد الإصدار الأول بدل ما أسيبه عند أول نسخة شغالة."
+      }
+    },
+    {
+      "slug": "sprint-store",
+      "name": "Sprint Store",
+      "category": "flutter",
+      "tagline": "مشروع تخرج من كورس Sprints — تطبيق تسوق",
+      "description": "تطبيق تسوق بنيته كمشروع نهائي لكورس Sprints، وراجعته وحسّنته بعد المراجعة الأولى.",
+      "status": "مشروع تدريبي مكتمل",
+      "coverIcon": "https://api.iconify.design/lucide/shopping-bag.svg?color=%23f3ece1",
+      "coverTone": "gold",
+      "image": "",
+      "images": [],
+      "tech": [
+        "Flutter",
+        "Dart"
+      ],
+      "links": {
+        "demo": ""
+      },
+      "caseStudy": {
+        "problem": "المشروع كان تطبيق تخرّج من كورس Sprints، والهدف إني أطبّق اللي اتعلمته في مشروع متكامل من الصفر مش تمارين منفصلة.",
+        "approach": "بعد أول نسخة، راجعت الكود بالكامل وصلحت مشاكل في الـ navigation واتجاه الـ scroll وبنية الـ widgets، وضفت screenshots حقيقية للمشروع بدل الـ placeholders.",
+        "features": [
+          "تدفق تسوق كامل: تصفح، سلة، شراء",
+          "مراجعة شاملة وتحسين بعد أول نسخة"
+        ],
+        "result": "لسه في خطتي أحسّن الـ transitions وأصلح الـ localization في نسخة جاية."
+      }
+    },
+    {
+      "slug": "forge",
+      "name": "Forge",
+      "category": "flutter",
+      "tagline": "تطبيق لياقة بدنية بواجهة عصرية ونظيفة مبني باستخدام Flutter.",
+      "description": "Forge هو تطبيق لياقة بدنية يركز على تقديم تجربة استخدام عصرية وبسيطة لمساعدة المستخدم على بدء رحلته الرياضية ومتابعة تقدمه. المشروع قيد التطوير، والتركيز الحالي على تصميم واجهة المستخدم وتحويل تصميم Figma إلى تطبيق Mobile Cross-platform باستخدام Flutter.",
+      "status": "قيد التطوير النشط",
+      "coverIcon": "https://api.iconify.design/lucide/smartphone.svg?color=%23f3ece1",
+      "coverTone": "gold",
+      "image": "/projects/forge-mve9fok00.png",
+      "images": [
+        "/projects/forge-mve9fok00.png",
+        "/projects/forge-mve9fq6b1.png",
+        "/projects/forge-mve9frsi2.png",
+        "/projects/forge-mve9ftgv3.png",
+        "/projects/forge-mve9fv2t4.png"
+      ],
+      "tech": [
+        "Flutter",
+        "Dart",
+        "Flutter BLoC",
+        "Responsive UI",
+        "flutter_screenutil_plus",
+        "flutter_svg",
+        "Smooth Page Indicator",
+        "Font Awesome Icons"
+      ],
+      "featured": true,
+      "links": {
+        "demo": ""
+      },
+      "caseStudy": {
+        "problem": "تطبيقات اللياقة البدنية تحتوي على واجهات مزدحمة وتجارب استخدام معقدة، مما قد يجعل بداية الرحلة الرياضية غير واضحة للمستخدم. يهدف Forge إلى تقديم تجربة بسيطة ومنظمة تساعد المستخدم على فهم التطبيق والتفاعل معه بسهولة.",
+        "approach": "تم تصميم وتنفيذ Forge باستخدام Flutter مع التركيز على بناء واجهة مستخدم نظيفة وعصرية. تم استخدام تصميم داكن مع اللون الأحمر كلون أساسي، إلى جانب تنظيم المشروع باستخدام هيكل Core وFeatures وإنشاء Widgets قابلة لإعادة الاستخدام. تم تنفيذ شاشات Onboarding وتسجيل الدخول وإنشاء الحساب، مع تجهيز المشروع للتوسع وإضافة الخصائص المستقبلية.",
+        "features": [
+          "- شاشة Onboarding تشرح فكرة التطبيق.",
+          "- تصميم Dark UI عصري ونظيف.",
+          "- شاشات تسجيل الدخول وإنشاء الحساب.",
+          "- واجهة Responsive لمختلف أحجام الشاشات.",
+          "- استخدام SVG Icons ورسومات مخصصة.",
+          "- تنظيم المشروع باستخدام Core وFeatures.",
+          "- Widgets قابلة لإعادة الاستخدام.",
+          "- تجربة مستخدم بسيطة وواضحة.",
+          "- المشروع قابل للتوسع وإضافة خصائص اللياقة مستقبلًا."
+        ],
+        "result": "ساعدني مشروع Forge على تطوير مهاراتي في Flutter وتحويل تصميمات Figma إلى تطبيق Mobile Cross-platform. تعلمت خلاله كيفية تنظيم ملفات المشروع، بناء واجهات Responsive، إنشاء Widgets قابلة لإعادة الاستخدام، اختيار الألوان والخطوط المناسبة، وتحسين تجربة المستخدم. ما زال المشروع قيد التطوير، والتركيز الحالي منصب على تطوير واجهة المستخدم قبل إضافة منطق الأعمال والخصائص المتقدمة."
       }
     }
   ],
