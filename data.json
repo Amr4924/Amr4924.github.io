@@ -152,6 +152,15 @@
       "coverIcon": "https://api.iconify.design/lucide/watch.svg?color=%23f3ece1",
       "coverTone": "rose",
       "image": "/projects/aura-timepieces.png",
+      "images": [
+        "/projects/aura-timepieces.png",
+        "/projects/aura-timepieces-mve7xfwt0.webp",
+        "/projects/aura-timepieces-mve7xjjr1.webp",
+        "/projects/aura-timepieces-mve7xoyv2.png",
+        "/projects/aura-timepieces-mve7xr2g3.png",
+        "/projects/aura-timepieces-mve7xtmj4.png",
+        "/projects/aura-timepieces-mve7xvrn5.webp"
+      ],
       "tech": [
         "Flutter",
         "Dart",
@@ -183,6 +192,7 @@
       "coverIcon": "https://api.iconify.design/lucide/gem.svg?color=%23f3ece1",
       "coverTone": "gold",
       "image": "",
+      "images": [],
       "tech": [
         "Flutter",
         "Dart",
@@ -214,6 +224,7 @@
       "coverIcon": "https://api.iconify.design/lucide/graduation-cap.svg?color=%23f3ece1",
       "coverTone": "rose",
       "image": "",
+      "images": [],
       "tech": [
         "Flutter",
         "Dart"
@@ -245,6 +256,7 @@
       "coverIcon": "https://api.iconify.design/lucide/shopping-bag.svg?color=%23f3ece1",
       "coverTone": "gold",
       "image": "",
+      "images": [],
       "tech": [
         "Flutter",
         "Dart"
@@ -272,6 +284,7 @@
       "coverIcon": "https://api.iconify.design/lucide/list-checks.svg?color=%23f3ece1",
       "coverTone": "rose",
       "image": "",
+      "images": [],
       "tech": [
         "Flutter",
         "Dart"
