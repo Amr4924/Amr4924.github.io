@@ -193,8 +193,15 @@
       "status": "قيد التطوير النشط",
       "coverIcon": "https://api.iconify.design/lucide/gem.svg?color=%23f3ece1",
       "coverTone": "gold",
-      "image": "",
-      "images": [],
+      "image": "/projects/m-jewellery-mve86jie8.webp",
+      "images": [
+        "/projects/m-jewellery-mve86jie8.webp",
+        "/projects/m-jewellery-mve86p8h9.png",
+        "/projects/m-jewellery-mve86tzsa.webp",
+        "/projects/m-jewellery-mve86vuob.png",
+        "/projects/m-jewellery-mve87c8ed.webp",
+        "/projects/m-jewellery-mve86y2ac.png"
+      ],
       "tech": [
         "Flutter",
         "Dart",
@@ -225,14 +232,21 @@
       "status": "مكتمل",
       "coverIcon": "https://api.iconify.design/lucide/graduation-cap.svg?color=%23f3ece1",
       "coverTone": "rose",
-      "image": "",
-      "images": [],
+      "image": "/projects/tech-school-mve8hwxbf.webp",
+      "images": [
+        "/projects/tech-school-mve8hwxbf.webp",
+        "/projects/tech-school-mve8i4eeg.webp",
+        "/projects/tech-school-mve8i8ehh.png",
+        "/projects/tech-school-mve8ia66i.webp",
+        "/projects/tech-school-mve8idkuj.png",
+        "/projects/tech-school-mve8ifwxk.png"
+      ],
       "tech": [
         "Flutter",
         "Dart"
       ],
       "links": {
-        "demo": ""
+        "demo": "https://github.com/Amr4924/Tech-School"
       },
       "caseStudy": {
         "problem": "عايز أبني تطبيق بعدد شاشات وميزات كبير يقارب حجم منصة تعليم حقيقية، عشان أتمرن على تنظيم مشروع كبير مش بس شاشة أو اتنين.",
