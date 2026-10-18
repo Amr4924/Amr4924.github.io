@@ -299,8 +299,18 @@
       "status": "مكتمل",
       "coverIcon": "https://api.iconify.design/lucide/list-checks.svg?color=%23f3ece1",
       "coverTone": "rose",
-      "image": "",
-      "images": [],
+      "image": "/projects/habitsandtasks-mve8u5u00.png",
+      "images": [
+        "/projects/habitsandtasks-mve8u5u00.png",
+        "/projects/habitsandtasks-mve8ugmv1.png",
+        "/projects/habitsandtasks-mve8ujdn2.png",
+        "/projects/habitsandtasks-mve8un2h3.png",
+        "/projects/habitsandtasks-mve8uow04.png",
+        "/projects/habitsandtasks-mve8ur8m5.png",
+        "/projects/habitsandtasks-mve8utve6.png",
+        "/projects/habitsandtasks-mve8uxsc8.png",
+        "/projects/habitsandtasks-mve8uw067.png"
+      ],
       "tech": [
         "Flutter",
         "Dart"
