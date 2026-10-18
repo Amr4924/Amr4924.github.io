@@ -126,3 +126,10 @@ label.btn { cursor: pointer; position: relative; }
 .icon-wrap { display: flex; align-items: center; gap: 10px; }
 .icon-wrap input { flex: 1; min-width: 0; }
 .icon-wrap .icon-prev { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
+
+/* ---------- project gallery editor ---------- */
+.img-rows { display: grid; gap: 8px; margin-bottom: 10px; }
+.img-row { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border-soft); border-radius: 12px; padding: 8px 10px; }
+.img-row__thumb { width: 46px; height: 82px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-soft); background: var(--surface-2); flex-shrink: 0; }
+.img-row__thumb.is-web { width: 96px; height: 60px; }
+.img-row__name { margin-inline-end: auto; font-size: 0.9rem; color: var(--text-muted); }

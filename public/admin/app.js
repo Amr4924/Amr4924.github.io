@@ -86,6 +86,19 @@
   };
   const DEFAULT_EDU = 'Computer Science & AI — South Valley National University (SVNU), خريج متوقع يونيو 2028';
 
+  // A project's gallery lives in `images`; `image` always mirrors the first one (the card cover).
+  function ensureImages(p) {
+    let imgs = Array.isArray(p.images) ? p.images.filter(Boolean) : [];
+    if (!imgs.length && p.image) imgs = [p.image];
+    if (Object.prototype.hasOwnProperty.call(p, 'images')) { p.images = imgs; return; }
+    const entries = Object.keys(p).map((k) => [k, p[k]]);
+    Object.keys(p).forEach((k) => { delete p[k]; });
+    let placed = false;
+    entries.forEach((e) => { p[e[0]] = e[1]; if (e[0] === 'image') { p.images = imgs; placed = true; } });
+    if (!placed) p.images = imgs;
+  }
+  const syncCover = (p) => { p.image = (p.images && p.images[0]) || ''; };
+
   // Makes sure every container the UI edits exists, so the dashboard never crashes on a missing key.
   function normalize(d) {
     d.aboutMe = d.aboutMe || {};
@@ -110,6 +123,7 @@
       p.links = p.links || {};
       p.caseStudy = p.caseStudy || {};
       p.caseStudy.features = Array.isArray(p.caseStudy.features) ? p.caseStudy.features : [];
+      ensureImages(p);
     });
     // The site shows the first three projects when none is flagged; make that explicit in the UI.
     if (d.projects.length && !d.projects.some((p) => Object.prototype.hasOwnProperty.call(p, 'featured'))) {
@@ -123,7 +137,7 @@
     const add = (v) => { if (v && typeof v === 'string' && v.charAt(0) === '/') s.add(v); };
     add(d.profilePicture);
     add(d.heroPicture);
-    (d.projects || []).forEach((p) => add(p.image));
+    (d.projects || []).forEach((p) => { add(p.image); (p.images || []).forEach(add); });
     (d.certificates || []).forEach((c) => add(c.imageUrl));
     return s;
   }
@@ -420,9 +434,9 @@
     o = o || {};
     const stop = (e) => { e.preventDefault(); e.stopPropagation(); };
     return h('div', { class: 'row-actions' },
-      h('button', { type: 'button', class: 'icon-btn', title: 'لفوق', disabled: i === 0, onClick: (e) => { stop(e); move(arr, i, -1); changed(); rerender(); } }, '↑'),
-      h('button', { type: 'button', class: 'icon-btn', title: 'لتحت', disabled: i === arr.length - 1, onClick: (e) => { stop(e); move(arr, i, 1); changed(); rerender(); } }, '↓'),
-      h('button', { type: 'button', class: 'icon-btn danger', title: 'حذف', onClick: (e) => { stop(e); if (o.confirm && !window.confirm(o.confirm)) return; arr.splice(i, 1); changed(); rerender(); } }, 'حذف'));
+      h('button', { type: 'button', class: 'icon-btn', title: 'لفوق', disabled: i === 0, onClick: (e) => { stop(e); move(arr, i, -1); if (o.after) o.after(); changed(); rerender(); } }, '↑'),
+      h('button', { type: 'button', class: 'icon-btn', title: 'لتحت', disabled: i === arr.length - 1, onClick: (e) => { stop(e); move(arr, i, 1); if (o.after) o.after(); changed(); rerender(); } }, '↓'),
+      h('button', { type: 'button', class: 'icon-btn danger', title: 'حذف', onClick: (e) => { stop(e); if (o.confirm && !window.confirm(o.confirm)) return; arr.splice(i, 1); if (o.after) o.after(); changed(); rerender(); } }, 'حذف'));
   }
 
   /* ---------------------------------------------------- UI: image upload */
@@ -474,6 +488,9 @@
     return { b64: bytesToB64(bytes), mime, ext: MIME_EXT[mime] || 'png', size: bytes.length };
   }
 
+  let imgSeq = 0;
+  const newImagePath = (dir, base, ext) => dir + '/' + (slugify(base) || 'image') + '-' + Date.now().toString(36) + (imgSeq++).toString(36) + '.' + ext;
+
   function imageField(o) {
     const obj = o.obj;
     const key = o.key;
@@ -493,7 +510,7 @@
       status.textContent = 'بيتجهّز…';
       try {
         const img = await prepareImage(f);
-        const path = o.dir + '/' + (slugify(o.base()) || 'image') + '-' + Date.now().toString(36) + '.' + img.ext;
+        const path = newImagePath(o.dir, o.base(), img.ext);
         obj[key] = path;
         state.pending.set(path, img);
         state.previews.set(path, 'data:' + img.mime + ';base64,' + img.b64);
@@ -510,6 +527,49 @@
     return h('div', { class: 'field' },
       h('span', { class: 'field__label', text: o.label }),
       h('div', { class: 'img-field' }, prev, h('div', { class: 'img-field__side' }, h('div', { class: 'img-field__btns' }, h('label', { class: 'btn btn-soft btn-sm' }, 'اختيار صورة', file), rm), status)));
+  }
+
+  // Gallery editor for a project: several images, first one = cover on the project card.
+  function imagesField(p) {
+    const isWeb = p.category === 'web';
+    const hint = isWeb ? 'صور عرضية (16:9). أول صورة هي اللي بتظهر على كارت المشروع.' : 'سكرين شوتس طولية من التطبيق. أول صورة هي اللي بتظهر على كارت المشروع.';
+    const status = h('small', { class: 'field__hint', text: p.images.length ? hint : 'مفيش صور — بيظهر الشكل الافتراضي. ' + hint });
+    const file = h('input', { type: 'file', accept: 'image/*', multiple: true, class: 'file-hidden' });
+    file.addEventListener('change', async () => {
+      const files = Array.from(file.files || []);
+      if (!files.length) return;
+      status.textContent = 'بيتجهّز ' + files.length + ' صورة…';
+      let added = 0;
+      const errs = [];
+      for (let i = 0; i < files.length; i++) {
+        try {
+          const img = await prepareImage(files[i]);
+          const path = newImagePath('/projects', p.slug || 'project', img.ext);
+          p.images.push(path);
+          state.pending.set(path, img);
+          state.previews.set(path, 'data:' + img.mime + ';base64,' + img.b64);
+          added += 1;
+        } catch (e) { errs.push(files[i].name + ': ' + (e.message || 'مش مظبوطة')); }
+      }
+      try { file.value = ''; } catch (e) { /* ignore */ }
+      syncCover(p);
+      changed();
+      if (added) {
+        rerender();
+        toast('اتضافت ' + added + ' صورة' + (errs.length ? ' — وفشلت ' + errs.length : ''), errs.length > 0 && added === 0);
+      } else {
+        status.textContent = errs.join(' | ');
+      }
+    });
+    const rows = p.images.map((src, i) => h('div', { class: 'img-row' },
+      h('img', { class: 'img-row__thumb' + (isWeb ? ' is-web' : ''), alt: '', src: state.previews.get(src) || src }),
+      h('span', { class: 'img-row__name' }, i === 0 ? h('span', { class: 'badge badge--star', text: 'الغلاف' }) : 'صورة ' + (i + 1)),
+      rowActions(p.images, i, { after: () => syncCover(p) })));
+    return h('div', { class: 'field' },
+      h('span', { class: 'field__label', text: 'صور المشروع (' + p.images.length + ')' }),
+      rows.length ? h('div', { class: 'img-rows' }, rows) : null,
+      h('div', { class: 'img-field__btns' }, h('label', { class: 'btn btn-soft btn-sm' }, '+ إضافة صور', file)),
+      status);
   }
 
   function setIconImg(img, url) { if (url) img.setAttribute('src', url); else img.removeAttribute('src'); }
@@ -588,10 +648,7 @@
       h('div', { class: 'grid2' },
         field('لون الغلاف', sel(p, 'coverTone', TONES)),
         p.category === 'web' ? field('أيقونة الغلاف', iconInput(p, 'coverIcon', 'iconList'), 'مثال: lucide:globe أو simple-icons:astro') : null),
-      imageField({
-        label: 'صورة المشروع', obj: p, key: 'image', dir: '/projects', base: () => p.slug || 'project',
-        hint: p.category === 'web' ? 'صورة عرضية (16:9). لو سبتها فاضية بيظهر الغلاف الافتراضي.' : 'سكرين شوت طولي من التطبيق. لو سبتها فاضية بيظهر الشكل الافتراضي.',
-      }),
+      imagesField(p),
       field('رابط التجربة أو التحميل (اختياري)', inp(p.links, 'demo', { type: 'url', ltr: true, placeholder: 'https://…' }), 'لو فيه رابط بيظهر زرار Live Demo'),
       chk('اعرضه في الصفحة الرئيسية', p, 'featured', () => rerender()),
       h('p', { class: 'sub-title', text: 'صفحة تفاصيل المشروع' }),
@@ -609,7 +666,7 @@
     while (list.some((p) => p.slug === slug)) { n += 1; slug = 'new-project-' + n; }
     const p = {
       slug, name: 'مشروع جديد', category: 'flutter', tagline: '', description: '', status: 'قيد التطوير',
-      coverIcon: iconUrl('lucide:smartphone'), coverTone: 'rose', image: '', tech: ['Flutter', 'Dart'], featured: false,
+      coverIcon: iconUrl('lucide:smartphone'), coverTone: 'rose', image: '', images: [], tech: ['Flutter', 'Dart'], featured: false,
       links: { demo: '' }, caseStudy: { problem: '', approach: '', features: [], result: '' },
     };
     list.push(p);
@@ -836,7 +893,7 @@
         h('li', null, 'افتح ', h('a', { href: 'https://github.com/settings/personal-access-tokens/new', target: '_blank', rel: 'noopener' }, 'صفحة إنشاء توكن (Fine-grained)'), '.'),
         h('li', null, 'الاسم أي حاجة (مثلًا ', h('code', { text: 'portfolio-admin' }), ') والمدة مثلًا 90 يوم.'),
         h('li', null, h('b', { text: 'Repository access' }), ' ← Only select repositories ← اختار ', h('code', { text: CFG.repo || 'your-repo' }), ' بس.'),
-        h('li', null, h('b', { text: 'Permissions' }), ' ← Repository permissions ← ', h('b', { text: 'Contents: Read and write' }), ' (ومعاها Actions: Read-only لو عايز تشوف حالة النشر).'),
+        h('li', null, h('b', { text: 'Permissions' }), ' ← Repository permissions ← ', h('b', { text: 'Contents: Read and write' }), ' (و Actions: Read-only اختياري — بس لو بتنشر بـ GitHub Actions).'),
         h('li', null, 'دوس Generate token، انسخه، والصقه هنا:')),
       tokenInput,
       h('div', { class: 'login-actions' }, btn, h('label', { class: 'check' }, remember, 'افتكرني على الجهاز ده')),
@@ -912,6 +969,7 @@
   async function save() {
     if (state.busy || !state.data) return;
     trimDeep(state.data);
+    state.data.projects.forEach(syncCover);
     const errs = validate(state.data);
     if (errs.length) {
       showModal({ title: 'في حاجات محتاجة تتصلح قبل الحفظ', list: errs.slice(0, 12), actions: [['تمام']] });
@@ -932,7 +990,7 @@
       updateBar();
       showModal({
         title: 'اتحفظ',
-        body: 'الموقع هيتحدث خلال دقيقة أو اتنين (بعد ما GitHub يخلّص النشر). حالة النشر ظاهرة فوق.' + (r.uploaded ? ' اترفع ' + r.uploaded + ' صورة.' : '') + (r.deleted ? ' واتمسح ' + r.deleted + ' صورة مش مستخدمة.' : ''),
+        body: 'الموقع هيتحدث تلقائيًا خلال دقيقة أو اتنين بعد ما النشر يخلّص.' + (r.uploaded ? ' اترفع ' + r.uploaded + ' صورة.' : '') + (r.deleted ? ' واتمسح ' + r.deleted + ' صورة مش مستخدمة.' : ''),
         actions: [['تمام', null, 'btn-primary']],
       });
       watchDeploy(r.commitSha);

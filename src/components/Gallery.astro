@@ -1,0 +1,108 @@
+---
+import DeviceFrame from './DeviceFrame.astro';
+import CoverArt from './CoverArt.astro';
+// Project gallery: every image of the project in one horizontal scroll-snap carousel
+// (side arrows on desktop, swipe on touch). With no images it shows the placeholder art.
+interface Props { project: any; }
+const { project } = Astro.props;
+const isWeb = project.category === 'web';
+const real: string[] = (
+  Array.isArray(project.images) && project.images.length ? project.images : project.image ? [project.image] : []
+).filter(Boolean);
+---
+<div class:list={['gallery', isWeb && 'is-web']} data-gallery>
+  <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="الصورة السابقة" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg>
+  </button>
+
+  <div class="gallery__track" tabindex="0" role="group" aria-label={`صور ${project.name}`}>
+    {isWeb
+      ? (real.length ? real : ['']).map((src, i) => (
+          <div class="gallery__slide">
+            <div class="browser-frame is-large">
+              <div class="browser-frame__bar"><span></span><span></span><span></span></div>
+              <div class="browser-frame__body">
+                {src
+                  ? <img src={src} alt={`${project.name} — ${i + 1}`} class="real-screenshot" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                  : <CoverArt icon={project.coverIcon} label={project.name} tone={project.coverTone} />}
+              </div>
+            </div>
+          </div>
+        ))
+      : real.length
+        ? real.map((src, i) => (
+            <div class="gallery__slide frame-shot">
+              <DeviceFrame project={project} size="large" image={src} alt={`${project.name} — ${i + 1}`} />
+            </div>
+          ))
+        : [1, 2, 3].map((v) => (
+            <div class="gallery__slide frame-shot">
+              <DeviceFrame project={project} size="large" variant={v as 1 | 2 | 3} image="" />
+            </div>
+          ))}
+  </div>
+
+  <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="الصورة التالية" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg>
+  </button>
+  <div class="gallery__dots" hidden></div>
+</div>
+
+<script>
+  function initGallery(g: HTMLElement) {
+    const track = g.querySelector('.gallery__track') as HTMLElement | null;
+    const prev = g.querySelector('.gallery__arrow--prev') as HTMLButtonElement | null;
+    const next = g.querySelector('.gallery__arrow--next') as HTMLButtonElement | null;
+    const dotsEl = g.querySelector('.gallery__dots') as HTMLElement | null;
+    if (!track || !prev || !next || !dotsEl) return;
+    const slides = Array.from(track.children) as HTMLElement[];
+    if (!slides.length) return;
+
+    const rtl = () => getComputedStyle(track).direction === 'rtl';
+    const gap = () => parseFloat(getComputedStyle(track).columnGap) || 0;
+    const step = () => slides[0].getBoundingClientRect().width + gap();
+    const maxScroll = () => track.scrollWidth - track.clientWidth;
+    const pos = () => Math.abs(track.scrollLeft); // 0 at the start edge in both LTR and RTL
+    const perView = () => Math.max(1, Math.round((track.clientWidth + gap()) / step()));
+
+    let dots: HTMLButtonElement[] = [];
+    function scrollToIndex(i: number) {
+      const x = Math.min(i * step(), maxScroll());
+      track!.scrollTo({ left: rtl() ? -x : x, behavior: 'smooth' });
+    }
+    function buildDots() {
+      const count = Math.max(1, slides.length - perView() + 1);
+      if (dots.length === count) return;
+      dotsEl!.innerHTML = '';
+      dots = Array.from({ length: count }, (_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'gallery__dot';
+        b.setAttribute('aria-label', 'الصورة ' + (i + 1));
+        b.addEventListener('click', () => scrollToIndex(i));
+        dotsEl!.appendChild(b);
+        return b;
+      });
+    }
+    function update() {
+      buildDots();
+      const overflow = maxScroll() > 4;
+      prev!.hidden = !overflow;
+      next!.hidden = !overflow;
+      dotsEl!.hidden = !overflow;
+      prev!.disabled = pos() < 4;
+      next!.disabled = pos() > maxScroll() - 4;
+      const active = Math.min(dots.length - 1, Math.round(pos() / step()));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === active));
+    }
+
+    prev.addEventListener('click', () => track.scrollBy({ left: (rtl() ? 1 : -1) * step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: (rtl() ? -1 : 1) * step(), behavior: 'smooth' }));
+    let raf = 0;
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener('resize', update);
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(track);
+    update();
+  }
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(initGallery);
+</script>

@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import DeviceFrame from '../../components/DeviceFrame.astro';
-import CoverArt from '../../components/CoverArt.astro';
+import Gallery from '../../components/Gallery.astro';
 import siteData from '../../../data.json';
 
 export function getStaticPaths() {
@@ -25,31 +24,7 @@ const cs = project.caseStudy;
     <span class="case-status"><span class="dot"></span>{project.status}</span>
   </section>
 
-  {project.category === 'flutter' ? (
-    <div class="case-gallery reveal-group">
-      {project.image ? (
-        <div class="frame-shot frame-shot--single reveal">
-          <DeviceFrame project={project} size="large" />
-        </div>
-      ) : (
-        [1, 2, 3].map((v: any) => (
-          <div class="frame-shot reveal">
-            <DeviceFrame project={project} variant={v as 1 | 2 | 3} size="large" />
-          </div>
-        ))
-      )}
-    </div>
-  ) : (
-    <div class="case-gallery is-web reveal-group">
-      <div class="frame-shot reveal" style="aspect-ratio:16/9; grid-column: 1 / -1;">
-        {project.image ? (
-          <img src={project.image} alt={project.name} class="real-screenshot" loading="lazy" />
-        ) : (
-          <CoverArt icon={project.coverIcon} label={project.name} tone={project.coverTone} />
-        )}
-      </div>
-    </div>
-  )}
+  <div class="reveal"><Gallery project={project} /></div>
 
   <div class="case-grid reveal-group">
     <div class="case-card reveal">

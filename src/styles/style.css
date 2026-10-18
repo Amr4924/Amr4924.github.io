@@ -108,7 +108,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .reveal-group.is-visible > *:nth-child(7) { transition-delay: 480ms; }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-group > *, .phone-float, .marquee__track { transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }
+  .reveal, .reveal-group > *, .phone-float, .phone-float--soft, .marquee__track { transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
 /* ================= BUTTONS ================= */
@@ -243,6 +243,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; height: 100%; min-height: 460px; }
 .phone-float { animation: floatY 5.5s ease-in-out infinite; }
 .phone-float--slow { animation: floatY 6.5s ease-in-out infinite; animation-delay: 0.4s; }
+.phone-float--soft { animation: floatSoft 6s ease-in-out infinite; }
+@keyframes floatSoft { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @keyframes floatY {
   0%, 100% { transform: translateY(0) rotate(var(--tilt, -6deg)); }
   50% { transform: translateY(-16px) rotate(var(--tilt, -6deg)); }
@@ -341,16 +343,26 @@ html:not([dir="rtl"]) .marquee__track { animation-name: marqueeScrollLtr; }
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px var(--shadow); border-color: var(--rose-line); }
-.project-card__media { height: 190px; position: relative; }
-.project-card__media.is-web { padding: 18px; display: flex; align-items: center; justify-content: center; }
+.project-card__media { height: 346px; position: relative; background: radial-gradient(230px 210px at 50% 48%, rgba(193, 73, 92, 0.10), transparent 70%); }
+.project-card__media.is-web { height: auto; aspect-ratio: 16 / 10; padding: 18px; display: flex; align-items: center; justify-content: center; background: none; }
 .browser-frame { width: 100%; height: 100%; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; }
 .browser-frame__bar { height: 26px; background: rgba(0,0,0,0.25); display: flex; align-items: center; gap: 6px; padding: 0 10px; flex-shrink: 0; }
 .browser-frame__bar span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); }
 .browser-frame__body { flex: 1; position: relative; }
-.project-card__phone-wrap { height: 100%; display: flex; align-items: center; justify-content: center; padding: 16px 0; }
-.project-card__phone-wrap .device-frame--phone { width: 108px; height: 220px; border-radius: 20px; padding: 6px; }
-.project-card__phone-wrap .device-frame--phone .screen { border-radius: 14px; }
-.project-card__phone-wrap .device-frame--phone .notch { width: 46px; height: 8px; top: 6px; }
+.browser-frame__body > .real-screenshot, .browser-frame__body > .cover-art { position: absolute; inset: 0; }
+.browser-frame.is-large { height: auto; aspect-ratio: 16 / 10; }
+.project-card__phone-wrap { height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+/* phone in a project card: the whole phone is visible, not cropped */
+.device-frame--phone.is-card { width: 150px; height: 306px; border-radius: 28px; padding: 8px; box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.03); }
+.device-frame--phone.is-card .screen { border-radius: 20px; }
+.device-frame--phone.is-card .notch { width: 62px; height: 11px; top: 8px; }
+/* phone in the project-details gallery */
+.device-frame--phone.is-large { width: 220px; height: 450px; border-radius: 38px; padding: 11px; }
+.device-frame--phone.is-large .screen { border-radius: 28px; }
+@media (max-width: 560px) {
+  .device-frame--phone.is-large { width: 190px; height: 388px; border-radius: 33px; padding: 9px; }
+  .device-frame--phone.is-large .screen { border-radius: 24px; }
+}
 
 .project-card__body { padding: 22px 24px 24px; display: flex; flex-direction: column; flex-grow: 1; }
 .project-card__cat { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.05em; margin-bottom: 10px; display: inline-block; }
@@ -382,10 +394,33 @@ html:not([dir="rtl"]) .marquee__track { animation-name: marqueeScrollLtr; }
 .case-status { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 0.9rem; color: var(--text-muted); }
 .case-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--web-green); }
 
-.case-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; margin: 30px 0 10px; }
-.case-gallery .frame-shot { border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 9/16; border: 1px solid var(--border); }
-.case-gallery .frame-shot--single { grid-column: 1 / -1; max-width: 300px; margin-inline: auto; }
-.case-gallery.is-web .frame-shot { aspect-ratio: 16/10; }
+/* ---- project gallery: every image in one carousel (arrows on desktop, swipe on touch) ---- */
+.gallery { --gap: 18px; position: relative; margin: 30px 0 10px; }
+.gallery.is-web { max-width: 980px; margin-inline: auto; }
+.gallery__track { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scrollbar-width: none; padding: 4px 0; }
+.gallery__track::-webkit-scrollbar { display: none; }
+.gallery__slide { flex: 0 0 calc((100% - 2 * var(--gap)) / 3); min-width: 0; scroll-snap-align: start; }
+/* auto margins centre a short row (1-2 images) but collapse to 0 once the row overflows */
+.gallery__slide:first-child { margin-inline-start: auto; }
+.gallery__slide:last-child { margin-inline-end: auto; }
+.gallery.is-web .gallery__slide { flex-basis: 100%; }
+.frame-shot { border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 9 / 16; border: 1px solid var(--border); }
+@media (max-width: 900px) { .gallery:not(.is-web) .gallery__slide { flex-basis: calc((100% - var(--gap)) / 2); } }
+@media (max-width: 560px) { .gallery:not(.is-web) .gallery__slide { flex-basis: 78%; } }
+
+.gallery__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; background: rgba(21, 19, 15, 0.9); border: 1px solid var(--border); color: var(--text); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease; }
+.gallery__arrow[hidden], .gallery__dots[hidden] { display: none !important; }
+.gallery__arrow:hover:not(:disabled) { border-color: var(--gold-line); color: var(--gold); transform: translateY(-50%) scale(1.06); }
+.gallery__arrow:disabled { opacity: 0.28; cursor: default; }
+.gallery__arrow--prev { inset-inline-start: -16px; }
+.gallery__arrow--next { inset-inline-end: -16px; }
+.gallery__arrow svg { width: 20px; height: 20px; }
+html[dir="rtl"] .gallery__arrow--next svg, html:not([dir="rtl"]) .gallery__arrow--prev svg { transform: scaleX(-1); }
+/* phones/tablets (finger as the primary pointer) swipe instead; anything with a mouse/trackpad gets the arrows */
+@media (hover: none) and (pointer: coarse) { .gallery__arrow { display: none !important; } }
+.gallery__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.gallery__dot { width: 8px; height: 8px; border-radius: 999px; border: 0; padding: 0; background: var(--border); cursor: pointer; transition: width 0.25s ease, background 0.25s ease; }
+.gallery__dot.is-active { width: 22px; background: var(--gradient); }
 
 .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; margin-top: 20px; }
 .case-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px; }
