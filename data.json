@@ -97,6 +97,14 @@
       {
         "name": "PostMan",
         "icon": "https://api.iconify.design/simple-icons/postman.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Linux CLI",
+        "icon": "https://api.iconify.design/simple-icons/linux.svg?color=%23f3ece1"
+      },
+      {
+        "name": "Network+",
+        "icon": "https://api.iconify.design/simple-icons/cisco.svg?color=%23f3ece1"
       }
     ]
   },
