@@ -182,7 +182,7 @@
       ],
       "featured": true,
       "links": {
-        "demo": "https://www.mediafire.com/file/3hqfwlnq5249byu/app-release%25282%2529.apk/file"
+        "demo": "https://github.com/Amr4924/Quick-Bite-App/releases/tag/Staging_Release"
       },
       "caseStudy": {
         "problem": "كان التحدي هو تحويل تصميم Mobile UI إلى تطبيق Flutter منظم مع الحفاظ على المسافات، الألوان، التناسق، وتجربة استخدام واضحة لتطبيق طلب الطعام.",
